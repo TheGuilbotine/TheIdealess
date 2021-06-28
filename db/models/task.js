@@ -1,15 +1,34 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
-    taskName: DataTypes.STRING,
-    note: DataTypes.TEXT,
-    dueDate: DataTypes.DATE,
-    isCompleted: DataTypes.BOOLEAN,
-    listId: DataTypes.INTEGER,
-    taskTypeId: DataTypes.INTEGER
+    taskName: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      note: {
+        type: DataTypes.TEXT
+      },
+      dueDate: {
+        type: DataTypes.DATE
+      },
+      isCompleted: {
+        allowNull: false,
+        type: DataTypes.BOOLEAN
+      },
+      listId: {
+        allowNull: false, 
+        type: DataTypes.INTEGER,
+        references: { model: 'Lists'}
+      },
+      taskTypeId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: { model: 'TaskTypes'}
+      }
   }, {});
   Task.associate = function(models) {
-    // associations can be defined here
+   Task.belongsTo(models.List, { foreignKey: 'listId'})
+   Task.belongsTo(models.TaskType, { foreignKey: 'taskTypesId'})
   };
   return Task;
 };

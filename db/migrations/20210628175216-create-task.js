@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       taskName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       note: {
@@ -18,13 +19,18 @@ module.exports = {
         type: Sequelize.DATE
       },
       isCompleted: {
+        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       listId: {
-        type: Sequelize.INTEGER
+        allowNull: false, 
+        type: Sequelize.INTEGER,
+        references: { model: 'Lists'}
       },
       taskTypeId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'TaskTypes'}
       },
       createdAt: {
         allowNull: false,
