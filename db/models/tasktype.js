@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       }
   }, {});
   TaskType.associate = function(models) {
-   TaskType.hasMany(models.Task, { foreginKey: 'taskTypeId'})
+   TaskType.hasMany(models.Task, { foreignKey: 'taskTypeId'})
   };
   return TaskType;
 };
