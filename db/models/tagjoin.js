@@ -3,12 +3,12 @@ module.exports = (sequelize, DataTypes) => {
   const TagJoin = sequelize.define('TagJoin', {
     tagId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: { model: 'Tags'}
       },
       taskId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: { model: 'Tasks'}
       },
   }, {});
