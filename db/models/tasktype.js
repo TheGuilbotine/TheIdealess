@@ -1,10 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const TaskType = sequelize.define('TaskType', {
-    taskType: DataTypes.STRING
+    taskType: {
+        allowNull: false,
+        type: DataTypes.STRING
+      }
   }, {});
   TaskType.associate = function(models) {
-    // associations can be defined here
+   TaskType.hasMany(models.Task, { foreginKey: 'taskTypeId'})
   };
   return TaskType;
 };
