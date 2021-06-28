@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
-const { loginUser } = require('../auth');
+const { loginUser, logoutUser, requireAuth } = require('../auth');
 const db = require('../db/models');
 const { User } = db;
 const { csrfProtection, asyncHandler, check, handleValidationErrors } = require('./utils');
@@ -19,12 +19,17 @@ const validateEmailAndPassword = [
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', requireAuth, (req, res) => {
+    console.log(`bunch of nonsense`)
+    const lilVariable = 'ah string'
+    res.json({lilVariable})
+ // res.send('respond with a resource');
 });
 
+
+
 router.get('/login', 
-  // csrfProtection,
+   csrfProtection,
   asyncHandler( async(req, res, next) => {
 
     res.json({ csrfToken: req.csrfToken() })
@@ -48,12 +53,32 @@ router.post('/login',
     where: {email}
   });
   const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
-  // if (passwordMatch) {
-  //   loginUser(req, res, user);
-  //   return res.redirect('/');  // TODO change to '/account' which is the users page
-  // }
+  if (passwordMatch) {
+    loginUser(req, res, user);
+   // return res.redirect('/');  // TODO change to '/account' which is the users page
+  }
 
-  res.json({user})
+  res.json({user, passwordMatch})
 }));
 
+
+
+router.post('/register', 
+//csrfProtection, 
+asyncHandler( async (req, res) => {
+    const { username, firstName, lastName, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = User.build({ username, firstName, lastName, email, hashedPassword });
+    res.json({user})
+}))
+
+
+
+
+
+
+router.post('/logout', (req, res) => {
+    logoutUser(req, res);
+    res.redirect('/');
+})
 module.exports = router;
