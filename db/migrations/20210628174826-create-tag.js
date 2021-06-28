@@ -9,12 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
-      },
-      value: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       taskId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
