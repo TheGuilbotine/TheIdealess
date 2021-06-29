@@ -1,11 +1,12 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const { csrfProtection, 
   check, 
-  handleValidationErrors, 
   asyncHandler,
   validationResult,
 } = require('./utils');
 const { User } = require('../db/models');
+const { loginUser } = require('../auth');
 
 const router = express.Router();
 
@@ -18,8 +19,7 @@ const validateEmailAndPassword = [
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a password.'),
-  handleValidationErrors,
-]; //TODO add validators for special characters
+];
 
 router.get('/', 
   csrfProtection,
@@ -35,41 +35,37 @@ router.post('/',
   csrfProtection,
   validateEmailAndPassword,
   asyncHandler( async(req, res, next) => {
-    const { email, password } = req.body; // TODO verify we don't need username as well.
-    const user = await User.findOne({ where: { email } });
+    const { email, password } = req.body; 
+    // TODO verify we don't need username as well.
     
+    let errors = [];
     const validationErrors = validationResult(req);
-
-    if(validationErrors.isEmpty()) {
-
-
-      
-    }
-
-    const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
-    if (passwordMatch) {
-      loginUser(req, res, user);
-      return res.redirect('/');  // TODO change to '/account' which is the users page
-    } else {
-
-      res.render('login', {
-        title: 'Login',
-        email,
-        csrfToken: req.csrfToken(),
-      });
-    }
-
-    // res.json({user, passwordMatch});
-}));
-
+    
     if (validationErrors.isEmpty()) {
-      await user.save();
-      loginUser(req, res, next);
+      const user = await User.findOne({ where: { email } });
 
-      res.json({user});
-      res.redirect('/');
+      if (user !== null) {
+
+        const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+        if (passwordMatch) {
+          loginUser(req, res, user);
+          return res.redirect('/');  
+          // TODO change to '/account' which is the users page
+        } 
+      }
+
+      errors.push('Login failed for the provided email and password.')
     } else {
-      console.log('You\'ve got Errs!!!!')
-      const errors = validationErrors.array().map((error) => error.msg);
+      errors = validationErrors.array().map((error) => error.msg);
+    }
+
+    res.render('login', {
+      title: 'Login',
+      email,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+
+}));
 
 module.exports = router;
