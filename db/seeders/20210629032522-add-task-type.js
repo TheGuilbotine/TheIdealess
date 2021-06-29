@@ -5,7 +5,9 @@ module.exports = {
       return queryInterface.bulkInsert('TaskTypes', [
         { taskType: 'pre-travel', createdAt: new Date(), updatedAt: new Date() },
         { taskType: 'travel', createdAt: new Date(), updatedAt: new Date() },
-        { taskType: 'post-travel', createdAt: new Date(), updatedAt: new Date() },
+        { taskType: 'eating', createdAt: new Date(), updatedAt: new Date() },
+        { taskType: 'relaxing', createdAt: new Date(), updatedAt: new Date() },
+        { taskType: 'other', createdAt: new Date(), updatedAt: new Date() },
       ], {});
   },
 
