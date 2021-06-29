@@ -12,10 +12,4 @@ router.get('/', requireAuth, (req, res) => {
  // res.send('respond with a resource');
 });
 
-router.post('/logout', (req, res) => {
-    logoutUser(req, res);
-    // res.redirect('/');
-    res.json({message: "Success"})
-});
-
 module.exports = router;
