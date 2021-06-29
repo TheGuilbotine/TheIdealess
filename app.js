@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
+const accountRouter = require('./routes/account')
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
 
@@ -48,6 +49,7 @@ app.use('/users', usersRouter);
 app.use('/favicon.ico', express.static('images/favicon.ico'));
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/account', accountRouter);
 //TODO app.use('/api/users', apiUsersRouter);
 
 // catch 404 and forward to error handler

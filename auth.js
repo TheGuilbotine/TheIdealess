@@ -13,7 +13,7 @@ const logoutUser = (req, res) => {
 
 const requireAuth = (req, res, next) => { // need to import somewhere
     if(!res.locals.authenticated){
-        return res.redirect('/users/login')
+        return res.redirect('/login')
     }
     return next()
 }
@@ -22,7 +22,7 @@ const requireAuth = (req, res, next) => { // need to import somewhere
 const restoreUser = async (req, res, next) => {
   // check if req.session.auth is empty, occurs after test logins
   if(JSON.stringify(req.session.auth) === '{}') logoutUser(req, res);
-  
+
   if(req.session.auth) {
     const { userId } = req.session.auth
     try{

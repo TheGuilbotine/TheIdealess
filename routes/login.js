@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { csrfProtection, 
-  check, 
+const { csrfProtection,
+  check,
   asyncHandler,
   validationResult,
 } = require('./utils');
@@ -21,26 +21,28 @@ const validateEmailAndPassword = [
     .withMessage('Please provide a password.'),
 ];
 
-router.get('/', 
+router.get('/',
   csrfProtection,
   asyncHandler( async(req, res, next) => {
-
+    if (req.session.auth) {
+     return res.redirect('/account')
+    }
     res.render('login', {
       title: 'Login',
       csrfToken: req.csrfToken(),
     });
 }));
 
-router.post('/', 
+router.post('/',
   csrfProtection,
   validateEmailAndPassword,
   asyncHandler( async(req, res, next) => {
-    const { email, password } = req.body; 
+    const { email, password } = req.body;
     // TODO verify we don't need username as well.
-    
+
     let errors = [];
     const validationErrors = validationResult(req);
-    
+
     if (validationErrors.isEmpty()) {
       const user = await User.findOne({ where: { email } });
 
@@ -49,9 +51,8 @@ router.post('/',
         const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
         if (passwordMatch) {
           loginUser(req, res, user);
-          return res.redirect('/');  
-          // TODO change to '/account' which is the users page
-        } 
+          return res.redirect('/account');
+        }
       }
 
       errors.push('Login failed for the provided email and password.')

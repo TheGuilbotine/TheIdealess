@@ -1,36 +1,32 @@
+extends layout
 
-head 
-    link(rel="icon" href="/public/favicon.ico")
-     
-    link(rel='stylesheet' href='/stylesheets/account.css')
+block content
+  header(class='main-header')
 
-body
-    header(class='main-header')
-        
-        div(class='title')
-            h2 WELCOME EXPLORER 
-        
-        div(class='header-search')
-            input(type='text' class='search-bar')
-            button(class='search-button') Search
+    div(class='title')
+      h2 WELCOME EXPLORER #{title}
 
-               
-        div(class='log-out-button-div')
-            button(class='logout-button') Logout       
-            
-        div(class='settings-button-div')    
-            i(class="fas fa-cog")
-            button(class='settings-button') Settings  
-            
-        div(class='home-button-div')    
-            button(class='home-button') Home    
+    div(class='header-search')
+      input(type='text' class='search-bar')
+      button(class='search-button') Search
 
-    div(class="main-content")
-        
-        div(class='left-pannel')
 
-        div(class='center-display')
+    div(class='log-out-button-div')
+      button(class='logout-button') Logout
 
-        div(class='right-pannel')
+    div(class='settings-button-div')
+      i(class="fas fa-cog")
+      button(class='settings-button') Settings
 
-    footer(class='footer')
+    div(class='home-button-div')
+      button(class='home-button') Home
+
+  div(class="main-content")
+
+    div(class='left-panel')
+
+    div(class='center-display')
+
+    div(class='right-panel')
+
+  footer(class='footer')
