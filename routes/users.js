@@ -61,24 +61,44 @@ router.post('/login',
   res.json({user, passwordMatch})
 }));
 
+router.get('/register',
+  csrfProtection,
+  asyncHandler( async (req, res) => {
 
+    res.render('user-register', {
+      csrfToken: req.csrfToken(),
+    });
+  }));
 
 router.post('/register', 
-//csrfProtection, 
-asyncHandler( async (req, res) => {
+  csrfProtection, 
+  asyncHandler( async (req, res) => {
     const { username, firstName, lastName, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = User.build({ username, firstName, lastName, email, hashedPassword });
-    res.json({user})
-}))
+    
+    if (user) {
+      await user.save();
+      res.json({user});
+      res.redirect('/');
+    } else {
 
-
-
-
-
+      res.render('user-register', {
+        username,
+        firstName,
+        lastName,
+        email,
+        csrfToken: req.csrfToken(),
+      });
+      // res.json({csrfToken, username, firstName, lastName, email})
+    }
+}));
 
 router.post('/logout', (req, res) => {
     logoutUser(req, res);
     res.redirect('/');
-})
+});
+
+
+
 module.exports = router;

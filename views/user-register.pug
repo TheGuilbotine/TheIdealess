@@ -1,0 +1,19 @@
+extends layout 
+
+include utils
+
+block content
+  +validationErrorSummary(errors)
+  form(action='/register', method='post')
+    input(type='hidden', name='_csrf', value=csrfToken)
+    label(for='firstName') First Name 
+    input(type='text', name='firstName', id='firstName', value=firstName, class='')
+    label(for='lastName') Last Name 
+    input(type='text', name='lastName', id='lastName', value=lastName, class='')
+    label(for='username') Username 
+    input(type='text', name='username', id='username', value=username, class='')
+    label(for='email') Email 
+    input(type='text', name='password', id='password', value=password, class='')
+    div(class='')
+      button(type='submit', class='') Register
+      a(href='/', class='') Cancel
