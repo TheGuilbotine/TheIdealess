@@ -1,15 +1,15 @@
 mixin validationErrorSummary(errors)
   if errors
-    div(class='' role='alert')
+    div(class='error error__summary' role='alert')
       p The following error(s) occurred:
       ul
         each error in errors
           li= error
 
-mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder = null)
-  div(class='')
+mixin field(labelText, fieldName, fieldValue, className, classField, fieldType = 'text', placeholder = null)
+  div(class=className)
     label(for=fieldName)= labelText
     if fieldType === 'textarea'
-      textarea(id=fieldName name=fieldName class='' rows='5')= fieldValue
+      textarea(id=fieldName name=fieldName class=classField rows='5')= fieldValue
     else
-      input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder class='')
+      input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder class=classField)

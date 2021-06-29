@@ -1,0 +1,13 @@
+extends layout 
+
+include utils
+
+block content 
+  +validationErrorSummary(errors)
+  form(action='/login', method='post')
+    input(type='hidden', name='_csrf', value=csrfToken)
+    +field('Username', 'username', username)
+    +field('Password', 'password', password)
+    div(class='')
+      button(type='submit', class='') Login 
+      a(href='/', class='') Cancel

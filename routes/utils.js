@@ -27,4 +27,5 @@ module.exports = {
     asyncHandler,
     handleValidationErrors,
     check,
+    validationResult,
 };
