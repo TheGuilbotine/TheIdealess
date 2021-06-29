@@ -8,6 +8,8 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
 
@@ -18,14 +20,13 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(sessionSecret));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 // set up session middleware
 const store = new SequelizeStore({ db: sequelize });
-
+console.log('before session');
 app.use(
   session({
     name: 'whats-next.sid',
@@ -33,16 +34,20 @@ app.use(
     store,
     saveUninitialized: false,
     resave: false,
-  })
-);
-
-// create Session table if it doesn't already exist
+}));
+console.log('affter session');
+  // create Session table if it doesn't already exist
 store.sync();
-app.use(restoreUser)
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use(restoreUser);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/favicon.ico', express.static('images/favicon.ico'));
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 //TODO app.use('/api/users', apiUsersRouter);
 
 // catch 404 and forward to error handler
