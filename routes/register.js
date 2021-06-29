@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { csrfProtection, 
-  check, 
+const { csrfProtection,
+  check,
   asyncHandler,
   validationResult,
 } = require('./utils');
@@ -89,9 +89,9 @@ router.post('/',
   csrfProtection,
   asyncHandler(async (req, res, next) => {
     const { username, firstName, lastName, email, password } = req.body;
-    
+
     const validationErrors = validationResult(req);
-    
+
     if (validationErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.build({ username, firstName, lastName, email, hashedPassword});
@@ -99,14 +99,14 @@ router.post('/',
 
       loginUser(req, res, next);
 
-      return res.redirect('/');
+      return res.redirect('/account');
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
 
       res.render('register', {
         title: 'Register',
         username,
-        firstName, 
+        firstName,
         lastName,
         email,
         errors,
