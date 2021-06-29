@@ -8,7 +8,7 @@ const loginUser = (req, res, user) => {
 };
 
 const logoutUser = (req, res) => {
-    delete req.session.auth 
+    delete req.session.auth
 }
 
 const requireAuth = (req, res, next) => { // need to import somewhere
@@ -27,15 +27,15 @@ const restoreUser = async (req, res, next) => {
         if(user){
             res.locals.authenticated = true;
             res.locals.user = user
-            next()
+           return next()
         }
       }catch (err) {
-          res.locals.auntheticated = false
-          next(err)
+          res.locals.authenticated = false
+          return next(err)
       }
   } else {
-      res.locals.authenticated = false; 
-      next()
+      res.locals.authenticated = false;
+     return next()
   }
 }
 

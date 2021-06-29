@@ -10,6 +10,7 @@ const handleValidationErrors = (req, res, next) => {
     if (!validationErrors.isEmpty()) {
         console.log('You\'ve got mail ===>');
         const errors = validationErrors.array().map((error) => error.msg);
+        console.log(errors);
 
         const err = Error('Error Error Will Robinson');
         err.status = 400;

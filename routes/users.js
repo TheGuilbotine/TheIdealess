@@ -54,7 +54,8 @@ const validateUsers = [
     check('password')
       .exists({ checkFalsy: true })
       .withMessage('Please enter a password')
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*-]{8,30})/)
+      // TODO fix regex expression
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*^?&])[A-Za-z\d@$^!%*?&]{8,}$/, 'g')
       .withMessage(`Please create a password between 8 and 30 characters in length
                     with at least one lower case letter, one upper case letter,
                     one number, and one special character`),
@@ -126,36 +127,43 @@ router.get('/register',
 
 router.post('/register',
   validateUsers,
-  //csrfProtection,
-  asyncHandler( async (req, res) => {
+  // csrfProtection,
+  asyncHandler(async (req, res, next) => {
+    console.log("Hit Route====>")
     const { username, firstName, lastName, email, password } = req.body;
+    console.log('HELLOOOOOOOOOOOOOOOOOOO');
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = User.build({ username, firstName, lastName, email, hashedPassword });
+    const user = await User.build({ username, firstName, lastName, email, hashedPassword });
 
-    const validateErrors = validationResult(req);
+    const validationErrors = validationResult(req);
 
-    if (validationResult.isEmpty()) {
+    if (validationErrors.isEmpty()) {
       await user.save();
       loginUser(req, res, next);
-      res.redirect('/account');
+      // res.redirect('/account');
+
     } else {
       console.log('You\'ve got Errs!!!!')
-      const errors = validateErrors.array().map((error) => error.msq);
-        // TODO render the user login pug
-        /*
-        title: 'Login',
-        email,
-        errors,
-        csrfToken: req.csrfToken(),
-        */
+      const errors = validationErrors.array().map((error) => error.msg);
+        // res.render( '/register', {
+        //   title: 'Register',
+        //   username,
+        //   firstName,
+        //   lastName,
+        //   email,
+        //   errors,
+        //   csrfToken: req.csrfToken(),
+        // })
     }
 
     res.status(201).json({user});
 }));
 
 
+
 router.post('/logout', (req, res) => {
     logoutUser(req, res);
-    res.redirect('/');
+    // res.redirect('/');
+    res.json({message: "Success"})
 });
 module.exports = router;
