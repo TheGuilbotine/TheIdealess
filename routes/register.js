@@ -99,7 +99,7 @@ router.post('/',
       const user = await User.build({ username, firstName, lastName, email, hashedPassword});
       await user.save();
 
-      loginUser(req, res, next);
+      loginUser(req, res, user);
 
       return res.redirect('/account');
     } else {
