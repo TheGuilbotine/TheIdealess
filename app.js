@@ -11,7 +11,9 @@ const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const accountRouter = require('./routes/account');
+const demoRouter = require('./routes/demo')
 const logoutRouter = require('./routes/logout')
+
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
 
@@ -51,7 +53,9 @@ app.use('/favicon.ico', express.static('images/favicon.ico'));
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/account', accountRouter);
+app.use('/demo', demoRouter);
 app.use('/logout', logoutRouter);
+
 //TODO app.use('/api/users', apiUsersRouter);
 
 // catch 404 and forward to error handler

@@ -1,10 +1,14 @@
+
 div(class='splash')
-  div(class='splash__title')
+div(class='top-border')
+    
+ div(class='splash__title')
     h1 Welcome to WhatsNext
     p Your app to keep you on track
-  div
+div
     div(class='splash__buttons')
-      span
-        a(href='/login') Login
-        a(href='/register') Register
-        a(href='/demo') Demo
+        span
+            a(href='/login') Login
+            a(href='/register') Register
+            form(action='/demo' method='post')
+                button(type='submit' class='demo-butt') Demo
