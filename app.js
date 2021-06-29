@@ -37,7 +37,9 @@ app.use(
 
   // create Session table if it doesn't already exist
 store.sync();
+
 app.use(express.urlencoded({ extended: false }));
+
 app.use(restoreUser);
 
 app.use('/', indexRouter);

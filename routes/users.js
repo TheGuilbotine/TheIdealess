@@ -115,55 +115,54 @@ asyncHandler( async(req, res, next) => {
 
 router.get('/register',
   csrfProtection,
-  (req, res) => {
-    const user = User.build();
-    res.render('whateverthepugis', {
-      title: 'Register',
-      user,
+  asyncHandler( async (req, res) => {
+
+    res.render('user-register', {
       csrfToken: req.csrfToken(),
     });
-  }
-);
+  }));
+
 
 router.post('/register',
   validateUsers,
-  // csrfProtection,
+  csrfProtection,
   asyncHandler(async (req, res, next) => {
-    console.log("Hit Route====>")
+
     const { username, firstName, lastName, email, password } = req.body;
-    console.log('HELLOOOOOOOOOOOOOOOOOOO');
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.build({ username, firstName, lastName, email, hashedPassword });
-
+    
     const validationErrors = validationResult(req);
 
     if (validationErrors.isEmpty()) {
       await user.save();
       loginUser(req, res, next);
-      // res.redirect('/account');
 
+      res.json({user});
+      res.redirect('/');
     } else {
       console.log('You\'ve got Errs!!!!')
       const errors = validationErrors.array().map((error) => error.msg);
-        // res.render( '/register', {
-        //   title: 'Register',
-        //   username,
-        //   firstName,
-        //   lastName,
-        //   email,
-        //   errors,
-        //   csrfToken: req.csrfToken(),
-        // })
-    }
 
+        res.render('user-register', {
+          title: 'Register',
+          username,
+          firstName,
+          lastName,
+          email,
+          errors,
+          csrfToken: req.csrfToken(),
+        });
+      // res.json({csrfToken, username, firstName, lastName, email})
+    }
+  
     res.status(201).json({user});
 }));
-
-
 
 router.post('/logout', (req, res) => {
     logoutUser(req, res);
     // res.redirect('/');
     res.json({message: "Success"})
 });
+
 module.exports = router;
