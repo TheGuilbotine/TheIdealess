@@ -12,7 +12,8 @@ block content
 
 
     div(class='log-out-button-div')
-      button(class='logout-button') Logout
+      form(action='/logout' method='post')
+        button(type='submit' class='logout-button') Logout
 
     div(class='settings-button-div')
       i(class="fas fa-cog")
