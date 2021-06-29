@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  nav(class='navbar')
+    a(class='navbar__brand' href= '/') WhatsNext
+    button(type='button' )
+      span
+    div
+      span Welcome Adventurer!
+      form(action='/users/logout' method='post')
+        button(type='submit' class='logout__button') Logout
+      input(type='text', id='search-field')
+  .container
+    h2 #{title}
+  block content
