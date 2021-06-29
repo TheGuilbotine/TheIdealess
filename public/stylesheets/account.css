@@ -1,0 +1,133 @@
+body {
+    background-color: #FFF1D0;
+}
+
+h2 {
+    display: flex;
+    justify-content: center; 
+}
+
+.main-header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+    border-bottom: 1px solid black
+}
+
+.title {
+    grid-column-start: 2;
+	grid-row-start: 1;
+	display: flex;
+    justify-content: center;
+	align-items: center;
+
+}
+
+.header-search {
+    grid-column-start: 2;
+	grid-row-start: 2;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.search-button {
+    margin: 5px;
+}
+
+.log-out-button-div {
+    grid-column-start: 1;
+	grid-row-start: 2;
+	display: flex;
+	align-items: center;
+    padding-bottom: 10px;
+}
+
+.logout-button:hover {
+    transform: scale(1.5);
+}
+
+.settings-button-div {
+    grid-column-start: 3;
+	grid-row-start: 1;
+	display: flex;
+	align-items: center;
+    justify-content: flex-end;
+	padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.settings-button {
+    position: relative; 
+    top: 20px; 
+}
+
+.home-button-div {
+    grid-column-start: 3;
+	grid-row-start: 2;
+	display: flex;
+	align-items: center;
+    justify-content: flex-end;
+	padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+    display:flex;
+    justify-content: space-between;
+}
+
+
+.left-pannel {
+    grid-column-start: 1;
+	grid-row-start: 1;
+    border: 1px solid black;
+    height: 600px; 
+    width: 300px;
+    margin-top: 40px;
+    margin-right: 40px;
+   
+    
+
+}
+
+.center-display {
+    border: 1px solid black;
+    height: 400px; 
+    width: 600px;
+    margin-top: 100px;
+    
+    grid-column-start: 2;
+	grid-row-start: 1;
+	display: flex;
+    justify-content: center;
+	align-items: center;
+}
+
+
+.right-pannel {
+    grid-column-start: 3;
+	grid-row-start: 1;
+    border: 1px solid black;
+    height: 600px; 
+    width: 300px;
+    margin-top: 40px;
+    margin-left: 100px;
+    display: flex;
+	align-items: center;
+    justify-content: flex-end;
+    
+} 
+
+.footer {
+    height: 100px;
+    border: 2px solid black;
+    margin: 30px;
+
+}

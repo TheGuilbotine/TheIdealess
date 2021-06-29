@@ -42,12 +42,13 @@ app.use(restoreUser)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/favicon.ico', express.static('images/favicon.ico'));
 //TODO app.use('/api/users', apiUsersRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -59,5 +60,9 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.get('/account', (req, res) => {
+    res.render('account', {title:`Welcome Explorer` })
+})
 
 module.exports = app;
