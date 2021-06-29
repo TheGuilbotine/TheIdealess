@@ -76,7 +76,9 @@ const validateUsersRegister = [
 router.get('/',
   csrfProtection,
   asyncHandler( async (req, res) => {
-
+    if (req.session.auth) {
+      return res.redirect('/account')
+    }
     res.render('register', {
       title: 'Register',
       csrfToken: req.csrfToken(),

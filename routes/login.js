@@ -24,7 +24,9 @@ const validateEmailAndPassword = [
 router.get('/',
   csrfProtection,
   asyncHandler( async(req, res, next) => {
-
+    if (req.session.auth) {
+     return res.redirect('/account')
+    }
     res.render('login', {
       title: 'Login',
       csrfToken: req.csrfToken(),

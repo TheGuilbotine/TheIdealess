@@ -1,4 +1,32 @@
 extends layout
 
 block content
-    h1 Hey #{title} welcome to WhatsNext
+  header(class='main-header')
+
+    div(class='title')
+      h2 WELCOME EXPLORER #{title}
+
+    div(class='header-search')
+      input(type='text' class='search-bar')
+      button(class='search-button') Search
+
+
+    div(class='log-out-button-div')
+      button(class='logout-button') Logout
+
+    div(class='settings-button-div')
+      i(class="fas fa-cog")
+      button(class='settings-button') Settings
+
+    div(class='home-button-div')
+      button(class='home-button') Home
+
+  div(class="main-content")
+
+    div(class='left-panel')
+
+    div(class='center-display')
+
+    div(class='right-panel')
+
+  footer(class='footer')

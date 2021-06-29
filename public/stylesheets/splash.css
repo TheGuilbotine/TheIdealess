@@ -1,0 +1,14 @@
+.splash__header {
+    color: orangered;
+    margin: auto;
+}
+
+.splash {
+    display: grid;
+    justify-content: center;
+}
+
+.splash__title {
+    display: flex;
+    justify-content: center;
+}
