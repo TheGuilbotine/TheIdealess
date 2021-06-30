@@ -27,12 +27,18 @@ module.exports = (sequelize, DataTypes) => {
       }
   }, {});
   Task.associate = function(models) {
-   Task.belongsTo(models.List, { foreignKey: 'listId'})
+   Task.belongsTo(models.List, { foreignKey: 'listId' })
    Task.belongsTo(models.TaskType, { foreignKey: 'taskTypeId'})
    Task.belongsToMany(models.Tag, {
      through: 'TagJoins',
      foreignKey: 'taskId',
      otherKey: 'tagId'
+   })
+   // need to connect to what you are cascade deleting
+   Task.hasMany(models.TagJoin, {
+     foreignKey: 'taskId',
+     onDelete: 'CASCADE',
+     hooks: true
    })
   };
   return Task;
