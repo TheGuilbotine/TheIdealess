@@ -49,9 +49,9 @@ router.post('/',
 // requireAuth, //! require authentication for production
 validateList,
 asyncHandler(async (req, res, next) => {
-  // const { userId } = req.session.auth; //! use for production on browser
-  // const { listName } = req.body; //! use for production on browser
-  const { listName, userId } = req.body; //! use for testing in POSTMAN
+const { userId } = req.session.auth; //! use for production on browser
+  const { listName } = req.body; //! use for production on browser
+  //const { listName, userId } = req.body; //! use for testing in POSTMAN
 
   const list = await List.create({
     listName,
