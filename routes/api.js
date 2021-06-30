@@ -1,5 +1,5 @@
 const express = require('express');
-const { User, List, Task } = require('../db/models');
+const { List, Task, User } = require('../db/models');
 const { asyncHandler, handleValidationErrors, check } = require('./utils');
 const { requireAuth } = require('../auth');
 
@@ -15,8 +15,10 @@ const allListsNotFoundError = () => {
 
 router.get('/lists', 
   asyncHandler(async (req, res, next) => {
-    const lists = await List.findAll();
-
+    const lists = await List.findAll({
+      include: Task
+    });
+console.log(lists);
     if (lists.length) {
       res.json({ lists });
     } else {
