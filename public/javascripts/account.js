@@ -31,7 +31,7 @@ const fetchLists = async () => {
 
   const { lists } = await res.json();
   const listsContainer = document.querySelector('.center-display');
-  console.log(lists);
+  
 
   const listsHTML = lists.map(
     ({ listName, id }) => `
@@ -50,7 +50,6 @@ const fetchLists = async () => {
 
   // add event listeners to the delete buttons
   const deleteButtons = document.querySelectorAll('.list__delete_button');
-  console.log(deleteButtons);
   if (deleteButtons) {
     deleteButtons.forEach((button) => {
       button.addEventListener('click', handleListDelete(button.id));
@@ -58,15 +57,29 @@ const fetchLists = async () => {
   }
 };
 
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log(`loaded`)
+
+  //try {
+    addListHandler();
+    fetchLists();
+  //} catch (e) {
+   // console.error(e);
+  //}
+
+});
 const handleListAdd = () => {
-  return async () => {
+    console.log(`going there`)
+  //return async () => {
 
     const listAddInput = document.querySelector('.list__add_input');
     console.log(listAddInput.value);
     const listName = listAddInput.value;
 
+    
+
     try {
-      const res = await fetch('http://localhost:8080/api/lists', {
+      const res = await fetch('/api/lists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,22 +95,21 @@ const handleListAdd = () => {
     } catch (err) {
       console.error(err);
     }
-  }
+  //}
 };
+const addListButton = document.querySelector('.list__add_button');
 
 const addListHandler = () => {
-  const addListButton = document.querySelector('.list__add_button');
+  
   console.log(addListButton);
-  addListButton.addEventListener('click', handleListAdd());
+
+  //const listAddInput = document.getElement
+  addListButton.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    //const input = document.getElementById('listName')
+    // console.log(input.value)
+    console.log(`hit button`)
+    handleListAdd() 
+  });
 };
-
-document.addEventListener('DOMContentLoaded', async (event) => {
-
-  try {
-    addListHandler();
-    fetchLists();
-  } catch (e) {
-    console.error(e);
-  }
-
-});
