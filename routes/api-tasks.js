@@ -1,53 +1,61 @@
-const express = require('express');
-const { User, List, Task, TagJoin, Tag } = require('../db/models');
-const { asyncHandler, handleValidationErrors, check } = require('./utils');
-const { requireAuth } = require('../auth');
-const { validationResult } = require('express-validator');
+const express = require("express");
+const { User, List, Task, TagJoin, Tag } = require("../db/models");
+const { asyncHandler, handleValidationErrors, check } = require("./utils");
+const { requireAuth } = require("../auth");
+const { validationResult } = require("express-validator");
 
 const router = express.Router();
 
-
 const taskNotFoundError = (id) => {
-    const err = Error('Task not found');
-    err.errors = [`Task with id of ${id} is not found.`];
-    err.title = 'Task not found.';
-    err.status = 404;
-    return err;
-  };
+  const err = Error("Task not found");
+  err.errors = [`Task with id of ${id} is not found.`];
+  err.title = "Task not found.";
+  err.status = 404;
+  return err;
+};
 
-  const validateTask = [
-    check('taskName')
-      .exists({ checkFalsy: true })
-      .withMessage('Task name must be filled in.')
-      .isLength({ max: 30 })
-      .withMessage('Please keep task name at a reasonable length, below 30 characters.')
-      .isLength({ min: 3 })
-      .withMessage('It may be helpful to have a list with a name longer than 3 characters.'),
-    check('note')
-      .exists({ checkFalsy: true })
-      .withMessage('You might want to add text if you\'re going to make a task')
-      .isLength({ max: 75 })
-      .withMessage('Keeping your note short and sweet, under 75 characters, might help you stay on target'),
-    handleValidationErrors,
-  ];
+const validateTask = [
+  check("taskName")
+    .exists({ checkFalsy: true })
+    .withMessage("Task name must be filled in.")
+    .isLength({ max: 30 })
+    .withMessage(
+      "Please keep task name at a reasonable length, below 30 characters."
+    )
+    .isLength({ min: 3 })
+    .withMessage(
+      "It may be helpful to have a list with a name longer than 3 characters."
+    ),
+  check("note")
+    .isLength({ max: 75 })
+    .withMessage(
+      "Keeping your note short and sweet, under 75 characters, might help you stay on target"
+    ),
+  handleValidationErrors,
+];
 
-  router.get('/', asyncHandler(async (req, res) => {
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
     const tasks = await Task.findAll();
     if (tasks) {
       res.json({ tasks });
     } else {
-      const err = Error('Task not found');
+      const err = Error("Task not found");
       err.status = 404;
-      err.title = 'Task not found.';
+      err.title = "Task not found.";
       throw err;
     }
-  }));
+  })
+);
 
-  router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.get(
+  "/:id(\\d+)",
+  asyncHandler(async (req, res, next) => {
     const task = await Task.findOne({
       where: { id: req.params.id },
       // Might not need both Tag and TagJoin models
-      include: [List, TaskType, Tag, TagJoin]
+      include: [List, TaskType, Tag, TagJoin],
     });
     if (task) {
       res.json({
@@ -61,14 +69,18 @@ const taskNotFoundError = (id) => {
         tagId: task.TagJoins.tagId,
         list: task.List.listName,
         type: task.TaskType.taskType,
-
       });
     } else {
       next(taskNotFoundError(req.params.id));
     }
-  }));
+  })
+);
 
-  router.post('/', validateTask, asyncHandler(async (req, res) => {
+router.post(
+  "/",
+  // requireAuth,
+  validateTask,
+  asyncHandler(async (req, res) => {
     const { taskName, note, dueDate, taskTypeId, listId } = req.body;
 
     const task = await Task.build({
@@ -77,7 +89,7 @@ const taskNotFoundError = (id) => {
       note,
       dueDate,
       taskTypeId,
-      listId
+      listId,
     });
 
     // const user = await User.findByPk(req.session.auth.userId, {
@@ -101,35 +113,33 @@ const taskNotFoundError = (id) => {
       //   taskErrors
       // });
     }
-  }));
+  })
+);
 
-  router.put('/:id(\\d+)', validateTask, asyncHandler(async (req, res, next) => {
+router.put(
+  "/:id(\\d+)",
+  requireAuth,
+  validateTask,
+  asyncHandler(async (req, res, next) => {
     const {
       taskName,
-      note,
+      // note,
       // dueDate,
       // taskTypeId,
       // listId,
       // isCompleted,
     } = req.body;
 
+    console.log(taskName, req.params.id);
+
     const task = await Task.findOne({
       where: { id: req.params.id },
     });
-    console.log(task)
-
-    // if (req.session.auth.userId !== task.userId) {
-    //   const err = Error('You Shall Not Pass!');
-    //   err.status = 401;
-    //   err.message = 'You have no power here.';
-    //   err.title = 'Move Along';
-    //   throw err;
-    // }
 
     if (task) {
       await task.update({
         taskName,
-        note,
+        // note,
         // dueDate,
         // taskTypeId,
         // listId,
@@ -139,29 +149,28 @@ const taskNotFoundError = (id) => {
     } else {
       next(taskNotFoundError(req.params.id));
     }
-  }));
+  })
+);
 
-  router.delete('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.delete(
+  "/:id(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
     const { taskName } = req.body;
     const releasedTask = taskName;
     const task = await Task.findOne({
       where: { id: req.params.id },
     });
 
-    // if (req.session.auth.userId !== task.userId) {
-    //   const err = Error('No Sir');
-    //   err.status= 401;
-    //   err.message = 'This task is not yours to delete';
-    //   err.title = 'Imposter';
-    //   throw err;
-    // }
-
     if (task) {
       await task.destroy();
-      res.json({ message: `${releasedTask} has been released to the wild(deleted).`});
+      res.json({
+        message: `${releasedTask} has been released to the wild(deleted).`,
+      });
     } else {
       next(taskNotFoundError(req.params.id));
     }
-  }));
+  })
+);
 
-  module.exports = router;
+module.exports = router;
