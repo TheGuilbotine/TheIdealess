@@ -13,8 +13,14 @@
    width:fit-content;
    padding: 10px;
    grid-row-start: 2;
-   display:block;
+ 
    background-color: white;
+   
+}
+
+.login-content {
+    position: relative;
+    left: 
 }
 
 .bottom-div-login{
