@@ -10,15 +10,9 @@ body{
 
 
 
-.content {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-	grid-template-columns: auto;
-        
-}
-
 .register-form {
    border: 1px solid black; 
+   border-radius: 10px;
    height:fit-content;
    width:fit-content;
    padding: 10px;
@@ -34,7 +28,7 @@ body{
     grid-row-start: 3; 
     height:  100px;
     position: relative;
-    top:70px; 
+    top:183px; 
 }
 
 footer {
