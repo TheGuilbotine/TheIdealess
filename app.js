@@ -11,8 +11,9 @@ const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const accountRouter = require('./routes/account');
-const demoRouter = require('./routes/demo')
-const logoutRouter = require('./routes/logout')
+const demoRouter = require('./routes/demo');
+const logoutRouter = require('./routes/logout');
+const apiRouter = require('./routes/api');
 
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
@@ -25,12 +26,12 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser(sessionSecret));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // set up session middleware
 const store = new SequelizeStore({ db: sequelize });
-console.log('before session');
+
 app.use(
   session({
     name: 'whats-next.sid',
@@ -39,11 +40,8 @@ app.use(
     saveUninitialized: false,
     resave: false,
 }));
-console.log('affter session');
   // create Session table if it doesn't already exist
 store.sync();
-
-app.use(express.urlencoded({ extended: false }));
 
 app.use(restoreUser);
 
@@ -55,13 +53,12 @@ app.use('/register', registerRouter);
 app.use('/account', accountRouter);
 app.use('/demo', demoRouter);
 app.use('/logout', logoutRouter);
-
-//TODO app.use('/api/users', apiUsersRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   next(createError(404));
-// });
+app.use(function (req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -73,9 +70,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.get('/account', (req, res) => {
-    res.render('account', {title:`Welcome Explorer` })
-})
 
 module.exports = app;
