@@ -46,11 +46,12 @@ const validateList = [
 ];
 
 router.post('/',
-// requireAuth, //TODO require authentication when making fetch requests
+// requireAuth, //! require authentication for production
 validateList,
 asyncHandler(async (req, res, next) => {
-  // const { userId } = req.session.auth; //TODO get user id from session.auth
-  const { listName, userId } = req.body;
+  // const { userId } = req.session.auth; //! use for production on browser
+  // const { listName } = req.body; //! use for production on browser
+  const { listName, userId } = req.body; //! use for testing in POSTMAN
 
   const list = await List.create({
     listName,
@@ -66,7 +67,7 @@ asyncHandler(async (req, res, next) => {
 
 // only change the list id
 router.put('/:id(\\d+)',
-// requireAuth, //TODO require authentication when making fetch requests
+// requireAuth, //! require authentication for production
 asyncHandler(async (req, res, next) => {
   const { listName } = req.body;
   const list = await List.findByPk(req.params.id);
@@ -82,7 +83,7 @@ asyncHandler(async (req, res, next) => {
 }));
 
 router.delete('/:id(\\d+)',
-// requireAuth, //TODO require authentication when making fetch requests
+// requireAuth, //! require authentication for production
 asyncHandler(async (req, res, next) => {
   const list = await List.findByPk(req.params.id)
 
