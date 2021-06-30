@@ -7,7 +7,11 @@ module.exports = (sequelize, DataTypes) => {
       }
   }, {});
   TaskType.associate = function(models) {
-   TaskType.hasMany(models.Task, { foreignKey: 'taskTypeId'})
+   TaskType.hasMany(models.Task, {
+     foreignKey: 'taskTypeId',
+     onDelete: 'CASCADE',
+     hooks: true
+    })
   };
   return TaskType;
 };
