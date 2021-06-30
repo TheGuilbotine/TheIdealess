@@ -1,23 +1,49 @@
 .top-border{
     height: 30px;
     width: auto;
-    border: 1px solid black 
+    border: 1px solid black;
+    display: flex; 
+    justify-content: space-between;
+
 }
 
-h1{
-    color:red
-}
-.splash__header {
-    color: orangered;
-    margin: auto;
-}
-
-.splash {
-    display: grid;
-    justify-content: center;
+.world-clocks {
+    border: 1px solid black ;
+    height: 70px;
+    width: 70px;
+    margin: 10px;
+    display: inline-flex;
+    
 }
 
-.splash__title {
-    display: flex;
-    justify-content: center;
+.splash-content {
+    grid-row-start: 2;
+    border: 1px solid black;
+    height: 300px;
+    width: 400px;
+    border-radius: 50%;
+    margin-left: 200px;
+
+}
+
+.splash-content-text {
+   position: relative;
+   top: 100px;
+   left: 30px;
+
+}
+
+p {
+    position: relative;
+    left:60px;
+}
+
+
+.bottom-div-splash{
+    border: 1px solid blue;
+    background-color:blue; 
+    grid-row-start: 3; 
+    height:  100px;
+    position: relative;
+    top:200px; 
 }
