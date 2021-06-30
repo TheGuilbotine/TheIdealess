@@ -18,7 +18,7 @@ router.get('/lists',
     const lists = await List.findAll({
       include: Task
     });
-console.log(lists);
+
     if (lists.length) {
       res.json({ lists });
     } else {
@@ -48,8 +48,8 @@ router.post('/lists',
   // requireAuth, //TODO require authentication when making fetch requests
   validateList,
   asyncHandler(async (req, res, next) => {
-    // const { userId } = req.session.auth; //TODO get user id from session.auth
-    const { listName, userId } = req.body;
+    const { userId } = req.session.auth; //TODO get user id from session.auth
+    const { listName } = req.body;
     
     const list = await List.create({
       listName,

@@ -46,7 +46,7 @@ const fetchLists = async () => {
     `
   );
 
-  listsContainer.innerHTML = listsHTML.join('');
+  listsContainer.innerHTML += listsHTML.join('');
 
   // add event listeners to the delete buttons
   const deleteButtons = document.querySelectorAll('.list__delete_button');
@@ -58,10 +58,43 @@ const fetchLists = async () => {
   }
 };
 
+const handleListAdd = () => {
+  return async () => {
+
+    const listAddInput = document.querySelector('.list__add_input');
+    console.log(listAddInput.value);
+    const listName = listAddInput.value;
+
+    try {
+      const res = await fetch('http://localhost:8080/api/lists', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ listName }),
+      });
+
+      if (!res.ok) {
+        throw res;
+      }
+    
+      fetchLists();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+};
+
+const addListHandler = () => {
+  const addListButton = document.querySelector('.list__add_button');
+  console.log(addListButton);
+  addListButton.addEventListener('click', handleListAdd());
+};
+
 document.addEventListener('DOMContentLoaded', async (event) => {
 
-
   try {
+    addListHandler();
     fetchLists();
   } catch (e) {
     console.error(e);
