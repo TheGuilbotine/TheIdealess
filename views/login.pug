@@ -3,11 +3,16 @@ extends layout
 include utils
 
 block content 
-  +validationErrorSummary(errors)
-  form(action='/login', method='post')
-    input(type='hidden', name='_csrf', value=csrfToken)
-    +field('Email', 'email', email)
-    +field('Password', 'password', password)
-    div(class='')
-      button(type='submit', class='') Login 
-      a(href='/', class='') Cancel
+  div(class='error')
+    +validationErrorSummary(errors)
+  div(class='content')
+    div(class='top-div-login')
+    div(class='login-form')
+      form(action='/login', method='post')
+        input(type='hidden', name='_csrf', value=csrfToken)
+        +field('Email', 'email', email)
+        +field('Password', 'password', password)
+        div(class='buttons')
+          button(type='submit', class='') Login 
+          a(href='/', class='') Cancel
+    div(class='bottom-div-login')
