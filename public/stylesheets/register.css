@@ -1,0 +1,76 @@
+body{
+    height:600px;
+}
+.top-div{
+    border: 1px solid blue;
+    background-color:blue; 
+    grid-row-start: 1; 
+    height:  100px;
+}
+
+
+
+.register-form {
+   border: 1px solid black; 
+   border-radius: 10px;
+   height:fit-content;
+   width:fit-content;
+   padding: 10px;
+   grid-row-start: 2;
+   display:block;
+   background-color: white;
+   
+}
+
+.bottom-div{
+    border: 1px solid blue;
+    background-color:blue; 
+    grid-row-start: 3; 
+    height:  100px;
+    position: relative;
+    top:183px; 
+}
+
+footer {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: auto;
+    height: 15vh;
+    background-color: #849799;
+    color: black;
+    align-items: center;
+    
+}
+
+.footer-top {
+    display: flex; 
+    justify-content:center; 
+}
+
+.footer-bottom {
+     
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+    height: auto;
+    
+    
+}
+
+.footer__bottom-icons{
+    display:flex; 
+    justify-content: space-around;
+   
+
+}
+
+a {
+    text-decoration: none;
+    color:black
+}
+.name {
+    display: flex; 
+    justify-content:center;
+}
+
+
