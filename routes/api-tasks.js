@@ -70,7 +70,7 @@ const taskNotFoundError = (id) => {
     }
   }));
 
-  router.post('create', validateTask, asyncHandler(async (req, res) => {
+  router.post('/create', validateTask, asyncHandler(async (req, res) => {
     const { taskName, note, dueDate, taskTypeId, listId } = req.body;
 
     const task = await Task.build({
@@ -104,7 +104,7 @@ const taskNotFoundError = (id) => {
     }
   }));
 
-  router.put('/:id\\d+)/edit', validateTask, asyncHandler(async (req, res, next) => {
+  router.put('/:id(\\d+)/edit', validateTask, asyncHandler(async (req, res, next) => {
     const {
       taskName,
       note,

@@ -2,7 +2,6 @@ const express = require('express');
 const { User, List, Task } = require('../db/models');
 const { asyncHandler, handleValidationErrors, check } = require('./utils');
 const { requireAuth } = require('../auth');
-const { TableHints } = require('sequelize/types');
 const { validationResult } = require('express-validator');
 
 const router = express.Router();
@@ -15,7 +14,7 @@ const allListsNotFoundError = () => {
   return err;
 };
 
-router.get('/lists',
+router.get('/',
 asyncHandler(async (req, res, next) => {
   const lists = await List.findAll();
 
@@ -44,7 +43,7 @@ const validateList = [
   handleValidationErrors,
 ];
 
-router.post('/lists',
+router.post('/',
 // requireAuth, //TODO require authentication when making fetch requests
 validateList,
 asyncHandler(async (req, res, next) => {
@@ -64,7 +63,7 @@ asyncHandler(async (req, res, next) => {
 }));
 
 // only change the list id
-router.put('/lists/:id(\\d+)',
+router.put('/:id(\\d+)/edit',
 // requireAuth, //TODO require authentication when making fetch requests
 asyncHandler(async (req, res, next) => {
   const { listName } = req.body;
@@ -80,7 +79,7 @@ asyncHandler(async (req, res, next) => {
     }
 }));
 
-router.delete('/lists/:id(\\d+)',
+router.delete('/:id(\\d+)/delete',
 // requireAuth, //TODO require authentication when making fetch requests
 asyncHandler(async (req, res, next) => {
   const list = await List.findByPk(req.params.id)
