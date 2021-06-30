@@ -77,7 +77,7 @@ const handleListAdd = () => {
       if (!res.ok) {
         throw res;
       }
-
+    
       fetchLists();
     } catch (err) {
       console.error(err);

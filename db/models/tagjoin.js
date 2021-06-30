@@ -13,10 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       },
   }, {});
   TagJoin.associate = function(models) {
-    // not needed because at the end of the line only use if deleting tag as well
-    // TagJoin.belongsTo(models.Tag, { foreignKey: 'tagId' })
-    TagJoin.belongsTo(models.Task, { foreignKey: 'taskId' })
-
+    // associations can be defined here
   };
   return TagJoin;
 };

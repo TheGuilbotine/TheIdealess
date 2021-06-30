@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
         allowNull: false,
         type: DataTypes.STRING,
-        unique: true
+        unique: true  
       },
       firstName: {
         allowNull: false,
@@ -25,11 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       },
   }, {});
   User.associate = function(models) {
-    User.hasMany(models.List, {
-      foreignKey: 'userId',
-      onDelete: 'CASCADE',
-      hooks: true
-    })
+    User.hasMany(models.List, {foreignKey: 'userId'})
   };
   return User;
 };
