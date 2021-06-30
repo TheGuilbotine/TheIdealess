@@ -47,5 +47,48 @@ const fetchTasks = async () => {
     tasksContainer.innerHTML += tasksHTML.join('');
 
     // add event listeners to the delete buttons
-    const deleteTaskButtons
-}
+    const deleteTaskButtons = document.querySelectorAll('.task__add_input')
+
+    if (deleteTaskButtons) {
+        deleteButtons.forEach((button) => {
+            button.addEventListener('click', handleTaskDelete(button.id));
+        });
+    }
+};
+
+const handleTaskAdd = () => {
+    return async () => {
+        const taskAddInput = document.querySelector('.task__add_input');
+        const taskName = taskAddInput.value;
+
+        try {
+            const res = await fetch('/api/tasks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify({ taskName }),
+            });
+
+            if (!res.ok) {
+                throw res;
+            }
+
+            fetchTasks();
+        } catch (err) {
+            console.error(err);
+        }
+    }
+};
+
+const addTaskHandler = () => {
+    const addTaskButton = document.querySelector('.task__add_button');
+    addTaskButton.addEventListener('click', handleTaskAdd())
+};
+
+document.addEventListener('DOMContentLoaded', async (e) => {
+    try {
+        addTaskHandler();
+        fetchTasks();
+    } catch (e) {
+        console.errors(e);
+    }
+});
