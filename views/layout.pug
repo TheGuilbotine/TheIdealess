@@ -7,7 +7,45 @@ html
         link(rel="icon" href="/public/favicon.ico")
         link(rel='stylesheet' href='/stylesheets/account.css')
         link(rel='stylesheet' href='/stylesheets/splash.css')
+        link(rel='stylesheet' href='/stylesheets/register.css')
   body
     block content
   footer
-    p Welcome to WhatsNext, created by Taylor Walker, Nico Pierson, and Pierre Guilbault.
+    p(class='footer-top') Welcome to WhatsNext, created by 
+    div(class='footer-bottom')
+      
+      div(class='footer__name-Taylor')
+        h3(class='name') Taylor Walker
+        div(class='footer__bottom-icons')
+          a(href='https://github.com/tayynicc') Github
+            i(class="fab fa-github")
+
+          a(href='mailto:tw10262@gmail.com') Email
+            i(class="fas fa-envelope")
+          
+          a(href='#') LinkedIn
+            i(class="fab fa-linkedin")
+
+      div(class='footer-name' )
+        h3(class='name') Nico Pierson
+        div(class='footer__bottom-icons')
+          a(href='https://github.com/nicopierson') Github
+            i(class="fab fa-github")
+
+          a(href='#') Email
+              i(class="fas fa-envelope")
+          
+          a(href='#') LinkedIn
+              i(class="fab fa-linkedin")
+        
+      div(class='footer-name')
+        h3(class='name') Pierre Guilbault
+        div(class='footer__bottom-icons')
+          a(href='https://github.com/TheGuilbotine') Github
+            i(class="fab fa-github")
+
+            a(href='#') Email
+              i(class="fas fa-envelope")
+
+            a(href='#') LinkedIn
+              i(class="fab fa-linkedin")
