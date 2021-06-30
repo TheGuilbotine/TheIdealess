@@ -1,4 +1,4 @@
-extends layout
+extends layout 
 
 block content
   header(class='main-header')
@@ -27,7 +27,9 @@ block content
     div(class='left-panel')
 
     div(class='center-display')
+      label(for='listName') List Name 
+      input(type='text' name='listName' id='listName' class='list__add_input')
+      button(class='list__add_button') Add List
 
     div(class='right-panel')
-
-  footer(class='footer')
+  script(src='/javascripts/account.js' type='module')

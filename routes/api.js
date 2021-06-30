@@ -1,5 +1,5 @@
 const express = require('express');
-const { User, List, Task } = require('../db/models');
+const { List, Task, User } = require('../db/models');
 const { asyncHandler, handleValidationErrors, check } = require('./utils');
 const { requireAuth } = require('../auth');
 
@@ -15,7 +15,9 @@ const allListsNotFoundError = () => {
 
 router.get('/lists', 
   asyncHandler(async (req, res, next) => {
-    const lists = await List.findAll();
+    const lists = await List.findAll({
+      include: Task
+    });
 
     if (lists.length) {
       res.json({ lists });
@@ -46,8 +48,8 @@ router.post('/lists',
   // requireAuth, //TODO require authentication when making fetch requests
   validateList,
   asyncHandler(async (req, res, next) => {
-    // const { userId } = req.session.auth; //TODO get user id from session.auth
-    const { listName, userId } = req.body;
+    const { userId } = req.session.auth; //TODO get user id from session.auth
+    const { listName } = req.body;
     
     const list = await List.create({
       listName,
