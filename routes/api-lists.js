@@ -16,7 +16,9 @@ const allListsNotFoundError = () => {
 
 router.get('/',
 asyncHandler(async (req, res, next) => {
-  const lists = await List.findAll();
+  const lists = await List.findAll({
+    include: Task
+  });
 
   if (lists.length) {
     res.json({ lists });
