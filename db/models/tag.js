@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     Tag.belongsToMany(models.Task, {
         through: 'TagJoins',
         foreignKey: 'tagId',
-        otherKey: 'taskId'
+        otherKey: 'taskId',
+        onDelete: 'CASCADE',
+        hooks: true
     })
   };
   return Tag;

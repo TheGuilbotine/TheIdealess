@@ -65,7 +65,7 @@ asyncHandler(async (req, res, next) => {
 }));
 
 // only change the list id
-router.put('/:id(\\d+)/edit',
+router.put('/:id(\\d+)',
 // requireAuth, //TODO require authentication when making fetch requests
 asyncHandler(async (req, res, next) => {
   const { listName } = req.body;
@@ -81,7 +81,7 @@ asyncHandler(async (req, res, next) => {
     }
 }));
 
-router.delete('/:id(\\d+)/delete',
+router.delete('/:id(\\d+)',
 // requireAuth, //TODO require authentication when making fetch requests
 asyncHandler(async (req, res, next) => {
   const list = await List.findByPk(req.params.id)
