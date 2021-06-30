@@ -13,9 +13,16 @@ div(class='content')
 
         div(class='splash-content-links-logout-register')
             span
-                a(href='/login') Login
-                a(href='/register') Register
-
+               
+                   
+                button(type='submit' class='login-butt') 
+                    a(href='/login') Login
+                
+                 
+            
+                button(type='submit' class='register-butt') 
+                    a(href='/register') Register
+        
         div(class='demo-button')
                 form(action='/demo' method='post')
                    button(type='submit' class='demo-butt') Demo
