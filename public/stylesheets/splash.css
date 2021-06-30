@@ -2,7 +2,7 @@
     height: 30px;
     width: auto;
     border: 1px solid black;
-    display: flex; 
+    display: flex;
     justify-content: space-between;
 
 }
@@ -13,7 +13,7 @@
     width: 70px;
     margin: 10px;
     display: inline-flex;
-    
+
 }
 
 .splash-content {
@@ -22,7 +22,8 @@
     height: 300px;
     width: 400px;
     border-radius: 50%;
-    margin-left: 200px;
+    margin: auto;
+    display: grid;
 
 }
 
@@ -42,9 +43,17 @@ p {
 
 .bottom-div-splash{
     border: 1px solid blue;
-    background-color:blue; 
-    grid-row-start: 3; 
+    background-color:blue;
+    grid-row-start: 3;
     height:  100px;
     position: relative;
-    top:200px; 
+    top:200px;
+}
+
+.splash-content-text {
+    grid-row-start: 1;
+}
+
+.splash-content-links-logout-register {
+    grid-row-start: 2;
 }
