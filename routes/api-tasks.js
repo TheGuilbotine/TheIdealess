@@ -1,5 +1,5 @@
 const express = require('express');
-const { User, List, Task } = require('../db/models');
+const { User, List, Task, TagJoin, Tag } = require('../db/models');
 const { asyncHandler, handleValidationErrors, check } = require('./utils');
 const { requireAuth } = require('../auth');
 const { validationResult } = require('express-validator');
@@ -32,9 +32,7 @@ const taskNotFoundError = (id) => {
   ];
 
   router.get('/', asyncHandler(async (req, res) => {
-    const tasks = await Task.findAll({
-      where: { userId: req.session.auth.id },
-    });
+    const tasks = await Task.findAll();
     if (tasks) {
       res.json({ tasks });
     } else {
@@ -46,7 +44,7 @@ const taskNotFoundError = (id) => {
   }));
 
   router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
-    const task = await Task.findONe({
+    const task = await Task.findOne({
       where: { id: req.params.id },
       // Might not need both Tag and TagJoin models
       include: [List, TaskType, Tag, TagJoin]
@@ -70,7 +68,7 @@ const taskNotFoundError = (id) => {
     }
   }));
 
-  router.post('/create', validateTask, asyncHandler(async (req, res) => {
+  router.post('/', validateTask, asyncHandler(async (req, res) => {
     const { taskName, note, dueDate, taskTypeId, listId } = req.body;
 
     const task = await Task.build({
@@ -82,58 +80,60 @@ const taskNotFoundError = (id) => {
       listId
     });
 
-    const user = await User.findByPk(req.session.auth.userId, {
-      include: [List, Task]
-    });
+    // const user = await User.findByPk(req.session.auth.userId, {
+    //   include: [List, Task]
+    // });
 
-    const validatorErrors = validationResult(req);
-    if (validatorErrors.isEmpty()) {
+    // const validatorErrors = validationResult(req);
+    if (task) {
       await task.save();
       res.json({ task });
     } else {
-      const taskErrors = validatorErrors.array().map((error) => error.msg);
-      res.render('account', {
-        // Change to username?
-        title: 'Account',
-        username: user.username,
-        tasks: user.tasks,
-        lists: user.Lists,
-        task,
-        taskErrors
-      });
+      next(taskNotFoundError(req.params.id));
+      // const taskErrors = validatorErrors.array().map((error) => error.msg);
+      // res.render('account', {
+      //   // Change to username?
+      //   title: 'Account',
+      //   // username: user.username,
+      //   tasks: user.tasks,
+      //   lists: user.Lists,
+      //   task,
+      //   taskErrors
+      // });
     }
   }));
 
-  router.put('/:id(\\d+)/edit', validateTask, asyncHandler(async (req, res, next) => {
+  router.put('/:id(\\d+)', validateTask, asyncHandler(async (req, res, next) => {
     const {
       taskName,
       note,
-      dueDate,
-      taskTypeId,
-      listId,
-      isCompleted,
+      // dueDate,
+      // taskTypeId,
+      // listId,
+      // isCompleted,
     } = req.body;
 
-    const task = await Task.findONe({
+    const task = await Task.findOne({
       where: { id: req.params.id },
     });
+    console.log(task)
 
-    if (req.session.auth.userId !== task.userId) {
-      const err = Error('You Shall Not Pass!');
-      err.status = 401;
-      err.message = 'You have no power here.';
-      err.title = 'Move Along';
-      throw err;
-    }
+    // if (req.session.auth.userId !== task.userId) {
+    //   const err = Error('You Shall Not Pass!');
+    //   err.status = 401;
+    //   err.message = 'You have no power here.';
+    //   err.title = 'Move Along';
+    //   throw err;
+    // }
 
     if (task) {
       await task.update({
         taskName,
         note,
-        dueDate,
-        taskTypeId,
-        listId,
-        isCompleted
+        // dueDate,
+        // taskTypeId,
+        // listId,
+        // isCompleted
       });
       res.json({ task });
     } else {
@@ -141,20 +141,20 @@ const taskNotFoundError = (id) => {
     }
   }));
 
-  router.delete('/:id(\\d+)/delete', asyncHandler(async (req, res, next) => {
+  router.delete('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     const { taskName } = req.body;
     const releasedTask = taskName;
     const task = await Task.findOne({
       where: { id: req.params.id },
     });
 
-    if (req.session.auth.userId !== task.userId) {
-      const err = Error('No Sir');
-      err.status= 401;
-      err.message = 'This task is not yours to delete';
-      err.title = 'Imposter';
-      throw err;
-    }
+    // if (req.session.auth.userId !== task.userId) {
+    //   const err = Error('No Sir');
+    //   err.status= 401;
+    //   err.message = 'This task is not yours to delete';
+    //   err.title = 'Imposter';
+    //   throw err;
+    // }
 
     if (task) {
       await task.destroy();
