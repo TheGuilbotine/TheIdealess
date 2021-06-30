@@ -1,4 +1,33 @@
-/* .footer {
-    color: orangered;
-    font-size: x-small;
-} */
+
+.label {
+    display: flex;
+    justify-content: center;
+   
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 5px;
+}
+
+.content {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: auto;
+        
+}
+
+.error {
+    border: 1px solid black;
+    border-radius: 5px;
+    height:fit-content;
+    width:fit-content;
+    background-color: white;
+    color: red; 
+    
+}
+
+.error-header {
+    color: black; 
+}
