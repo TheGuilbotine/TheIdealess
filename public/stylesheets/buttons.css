@@ -1,17 +1,20 @@
+button {
+    border-radius: 13%;
+    transition: background-color .3s;
+}
+
+button:hover {
+    /* padding: 2px 12px; */
+}
+
 .login-butt {
     background-color: darkgreen;
-    transition: background-color .5s;
 }
 
 .register-butt {
     background-color: darkgreen;
-    transition: background-color .5s;
 }
 
-.demo-butt {
-    background-color: darkseagreen;
-    transition: background-color .5s;
-}
 
 .login-butt:hover {
     background-color: rgb(233, 218, 15);
@@ -21,14 +24,19 @@
     background-color: rgb(233, 218, 15)
 }
 
+.demo-butt {
+    background-color: darkseagreen;
+    transition: padding .6s;
+}
+
 .demo-butt:hover {
     background-color: rgb(28, 238, 9);
-
+    padding: 35PX;
 }
 
 .login__buttons {
     background-color: darkseagreen;
-    transition: background-color .5s;
+
 }
 
 .login__buttons:hover {
@@ -37,7 +45,7 @@
 
 .register__button {
     background-color: darkseagreen;
-    transition: background-color .5s;
+
 }
 
 .register__button:hover {
@@ -46,7 +54,7 @@
 
 .cancel__register {
     background-color: darkseagreen;
-    transition: background-color .5s;
+
 }
 
 .cancel__register:hover {
@@ -54,36 +62,71 @@
 }
 
 .logout-button {
-    background-color: deeppink;
-    transition: background-color .5s;
+    background-color: rgb(252, 207, 86);
+    transition: padding .3s;
+
 }
 
 .logout-button:hover {
-    background-color: fuchsia;
+    background-color: rgb(0, 174, 255);
+    padding: 20px;
 }
 
 .task__delete-button {
-    background-color: rgb(186, 10, 221);
-    transition: background-color .5s;
+    background-color: rgb(4, 124, 94);
+
 }
 
 .task__delete-button:hover {
     background-color: red;
+    padding: 2px 12px;
 }
 
 .task__edit-button {
-    background-color: rgb(186, 10, 221);
-    transition: background-color .5s;
+    background-color: rgb(4, 124, 94);
+
+}
+
+.task__add-button {
+
+}
+
+.task__add-button:hover {
+    background-color: seagreen;
+    color: springgreen;
 }
 
 .task__edit-button:hover {
     background-color: rgb(28, 238, 9);
+    padding: 2px 12px;
 }
 
 .list__delete-button {
+    background-color: rgb(4, 124, 94);
 
 }
 
 .list__edit-button {
+    background-color: rgb(4, 124, 94);
 
+}
+
+.list__add-button {
+    margin-bottom: 11px;
+
+}
+.list__delete-button:hover {
+    background-color: red;
+    padding: 2px 12px;
+}
+
+.list__edit-button:hover {
+    background-color: rgb(28, 238, 9);
+    padding: 2px 12px;
+}
+
+.list__add-button:hover {
+    margin-bottom: 11px;
+    background-color: seagreen;
+    color: springgreen;
 }

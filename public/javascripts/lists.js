@@ -1,4 +1,4 @@
-import { createInput, createDiv } from './utils.js';
+import { createInput, createDiv, createHeader } from './utils.js';
 
 const handleListDelete = (listId) => {
   return async () => {
@@ -61,7 +61,8 @@ const renderLists = async () => {
   leftPanel.innerHTML = '';
   const listsContainer = createDiv("lists__left-panel");
   leftPanel.append(listsContainer);
-  
+  const headerTag = createHeader("Lists", "lists__header");
+  listsContainer.append(headerTag);
 
   // create inputs for input to add, and edit
   createInput("listName", "list__add-input", listsContainer, "List Name", "list__input-div");
