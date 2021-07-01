@@ -3,7 +3,7 @@ extends layout
 include utils
 
 block content
-  div(class='error')
+  div(class='error error__container')
     +validationErrorSummary(errors)
   div(class='login-content')
     div(class='top-div-login')
@@ -12,8 +12,8 @@ block content
       div(class='login-form')
         form(action='/login', method='post')
           input(type='hidden', name='_csrf', value=csrfToken)
-          +field('Email', 'Email', email)
-          +field('Password', 'Password', password)
+          +field('Email', 'email', email)
+          +field('Password', 'password', password)
           div(class='buttons')
             button(type='submit', class='login__buttons') Login
             button(type='submit', class='login__buttons')

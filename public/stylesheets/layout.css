@@ -28,17 +28,18 @@ input{
     margin: 5px;
 }
 
-.error {
-    border: 1px solid black;
+.error{
+    border: 1px solid black;  
     border-radius: 5px;
-    height:fit-content;
+    height:auto;
     width:fit-content;
-    background-color: white;
+    background-color:rgb(245, 111, 107);
 
 }
 
 .error-header {
     color: black;
+
 }
 
 ul{
@@ -50,5 +51,9 @@ ul{
 
 li {
     margin: 5px;
-    color: red;
+    
+}
+
+li::marker {
+    color: black
 }
