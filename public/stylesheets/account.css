@@ -9,25 +9,26 @@ h2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: auto;
-    border-bottom: 1px solid black
+    border-bottom: 1px solid black;
+    padding: 10px;
+    background-color: rgba(36, 36, 140, 0.899);
 }
 
 .title {
-    grid-column-start: 2;
+    grid-column-start: 3;
 	grid-row-start: 1;
 	display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 	align-items: center;
+    margin-right: 100px
 }
 
 .header-search {
     grid-column-start: 2;
-	grid-row-start: 2;
+	grid-row-start: 1;
 	display: flex;
 	align-items: center;
     justify-content: center;
-	padding-left: 20px;
-    padding-bottom: 10px;
 }
 
 .search-button {
@@ -35,90 +36,91 @@ h2 {
 }
 
 .log-out-button-div {
-    grid-column-start: 1;
-	grid-row-start: 2;
+    grid-column-start: 3;
+	grid-row-start: 1;
 	display: flex;
+    justify-content: flex-end;
 	align-items: center;
-    padding-bottom: 10px;
+    padding-right: 5px;
 }
 
 .logout-button:hover {
-    transform: scale(1.5);
+    transform: scale(1.2);
 }
 
 .settings-button-div {
-    grid-column-start: 3;
+    grid-column-start: 1;
 	grid-row-start: 1;
 	display: flex;
 	align-items: center;
     justify-content: flex-end;
-	padding-left: 20px;
-    padding-bottom: 10px;
-}
-
-.settings-button {
-    position: relative;
-    top: 20px;
 }
 
 .home-button-div {
-    grid-column-start: 3;
-	grid-row-start: 2;
+    grid-column-start: 1;
+	grid-row-start: 1;
 	display: flex;
 	align-items: center;
-    justify-content: flex-end;
-	padding-left: 20px;
-    padding-bottom: 10px;
+    justify-content: flex-start;
+    padding-left: 5px;
 }
-
 
 .main-content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 0.5fr 1fr 1fr;
 	grid-template-rows: auto;
-    display:flex;
     justify-content: space-around;
 }
 
 
 .left-panel {
+    background-color: rgba(242, 231, 217, 0.934);
+    border: 1px solid rgba(75, 75, 75, 0.653);
     grid-column-start: 1;
 	grid-row-start: 1;
-    border: 1px solid black;
-    min-width: 300px;
     height: auto;
-    margin-top: 40px;
-    margin-right: 40px;
-    margin-left: 7px;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 .center-display {
-    border: 1px solid black;
+    background-color: rgb(250, 247, 245);
+    border: 1px solid rgba(254, 242, 229, 0.653);
     height: auto;
-    min-width: 600px;
-    margin-top: 100px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
     grid-column-start: 2;
 	grid-row-start: 1;
 	display: flex;
     justify-content: center;
 	align-items: center;
     flex-direction: column;
+    padding: 15px;
+    border-radius: 10px;
 }
 
-
 .right-panel {
+    background-color: rgba(242, 231, 217, 0.934);
+    border: 1px solid rgba(75, 75, 75, 0.653);
     grid-column-start: 3;
 	grid-row-start: 1;
-    border: 1px solid black;
-    height: auto;
-    min-width: 300px;
-    margin-top: 40px;
-    margin-left: 100px;
-    margin-right: 7px;
+    margin-top: 10px;
+    margin-right: 10px;
     display: flex;
 	align-items: center;
     justify-content: flex-end;
     flex-direction: column;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.footer {
+    height: 100px;
+    border: 2px solid black;
+    margin: 30px;
 }
 
 .tasks__center_display {
@@ -129,10 +131,6 @@ h2 {
 .lists__left_panel {
     margin: 2%;
     padding: 5%;
-}
-
-.task__container {
-
 }
 
 .list__body {
@@ -150,8 +148,4 @@ h2 {
     border-radius: 15px;
     background-color: rgb(240, 184, 82);
     box-shadow: peru;
-}
-
-.task__delete-button {
-
 }

@@ -18,12 +18,12 @@ h1 {
 
 .top-div{
     background-color: rgb(93, 37, 224);
+    background-color: #fadeaa;
 }
 
 .label {
     display: flex;
     justify-content: center;
-
 }
 
 .buttons{

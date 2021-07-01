@@ -7,7 +7,27 @@
 
 .top-div-login{
     background-color:rgb(93, 37, 224);
+    border: 1px solid blue;
+    background-color: blue;
+    grid-row-start: 1;
     height:  100px;
+}
+
+/* .logo { <-- not displaying
+    border: 1px solid black;
+    height: 85px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    background-image: url('../../photos/taylors-logos.png');
+} */
+
+
+.content__login {
+    display: flex;
+    justify-content: center;
+    margin: 300px;
 }
 
 .login-form{
@@ -17,4 +37,19 @@
    width:fit-content;
    padding: 10px;
    background-color: white;
+}
+
+
+.bottom-div-login{
+    border: 1px solid blue;
+    background-color:blue;
+    grid-row-start: 3;
+    height:  100px;
+    position: relative;
+    top:26px;
+}
+
+
+.login__buttons {
+    font-size: medium;
 }
