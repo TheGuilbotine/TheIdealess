@@ -18,7 +18,7 @@ h1 {
 }
 
 .top-div{
-    background-color: #849799;
+    background-color: rgb(93, 37, 224);
     /* background-color: #fadeaa; */
     grid-row-start: 1;
     height:  100px;

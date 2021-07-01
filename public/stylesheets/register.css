@@ -36,7 +36,6 @@ footer {
     grid-template-rows: repeat(2, 1fr);
 	grid-template-columns: auto;
     height: 15vh;
-    background-color: #849799;
     color: black;
     align-items: center;
 
