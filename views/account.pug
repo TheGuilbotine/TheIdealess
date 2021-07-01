@@ -3,24 +3,23 @@ extends layout
 block content
   header(class='main-header')
 
-    div(class='title')
-      h2 WELCOME EXPLORER #{title}
-
     div(class='header-search')
       input(type='text' class='search-bar')
       button(class='search-button') Search
 
+    div(class='home-button-div')
+      button(class='home-button') Home
+
+    div(class='title')
+      h2 Welcome #{title} the Explorer!
 
     div(class='log-out-button-div')
       form(action='/logout' method='post')
         button(type='submit' class='logout-button') Logout
 
-    div(class='settings-button-div')
-      i(class="fas fa-cog")
-      button(class='settings-button') Settings
-
-    div(class='home-button-div')
-      button(class='home-button') Home
+    //- div(class='settings-button-div')
+    //-   i(class="fas fa-cog")
+    //-   button(class='settings-button') Settings
 
   div(class="main-content")
 
