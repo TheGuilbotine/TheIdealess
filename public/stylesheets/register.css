@@ -1,9 +1,10 @@
 body{
-    height:600px;
+    height:auto;
 }
+
 .top-div{
     border: 1px solid blue;
-    background-color:blue;
+    /* background-color:blue; */
     grid-row-start: 1;
     height:  100px;
 }
@@ -27,9 +28,11 @@ body{
 
 }
 
+
 .register__button {
     font-size: medium;
 }
+
 .bottom-div{
     border: 1px solid blue;
     background-color:blue;

@@ -23,31 +23,29 @@
     width: 400px;
     border-radius: 50%;
     margin: auto;
-    display: grid;
-
+    display: flex;
 }
 
+.splash-circle {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.splash-content-links-logout-register {
+    display: flex;
+}
 
 .splash-content-text {
-   position: relative;
-   top: 100px;
-   left: 30px;
-
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
-p {
-    position: relative;
-    left:60px;
-}
-
-
-.bottom-div-splash{
-    border: 1px solid blue;
-    background-color:blue;
-    grid-row-start: 3;
-    height:  100px;
-    position: relative;
-    top:200px;
+.splash-welcome {
+    display: flex;
 }
 
 .splash-content-text {

@@ -1,9 +1,24 @@
 body {
+    display: flex;
     width: 100%;
-    background-color: #fadeaa;
+    height: 100%;
+    flex-direction: column;
 }
 
+html {
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgb(245, 156, 39);
+}
 
+h1 {
+    color: #555555;
+    text-align: center;
+}
+
+.top-div{
+    background-color: rgb(93, 37, 224);
+    background-color: #fadeaa;
 }
 
 .label {
@@ -24,6 +39,7 @@ body {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
 	grid-template-columns: auto;
+    height: 50%;
 
 }
 
@@ -50,6 +66,21 @@ ul{
     list-style-type: style color black;
     margin: 20px;
     grid-row-start: 2;
+}
+
+footer {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: auto;
+    /* height: 15vh; */
+    background-color: rgb(93, 37, 224);
+    color: black;
+    align-items: center;
+
+}
+
+.footer {
+    height: 100%;
 }
 
 li {

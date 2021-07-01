@@ -1,3 +1,10 @@
+
+
+h2 {
+    display: flex;
+    justify-content: center;
+}
+
 .main-header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -126,10 +133,6 @@
     padding: 5%;
 }
 
-.task__container {
-    
-}
-
 .list__body {
     padding-bottom: 5px;;
     border: 1px solid black;
@@ -145,8 +148,4 @@
     border-radius: 15px;
     background-color: rgb(240, 184, 82);
     box-shadow: peru;
-}
-
-.task__delete-button {
-
 }

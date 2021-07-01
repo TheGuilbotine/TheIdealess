@@ -1,6 +1,14 @@
+.content__login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+}
+
 .top-div-login{
+    background-color:rgb(93, 37, 224);
     border: 1px solid blue;
-    background-color: blue; 
+    background-color: blue;
     grid-row-start: 1;
     height:  100px;
 }
@@ -28,10 +36,7 @@
    height:fit-content;
    width:fit-content;
    padding: 10px;
-   grid-row-start: 2;
-
    background-color: white;
-
 }
 
 
@@ -54,4 +59,3 @@
     left:auto;
     margin: 10px;
 }
-
