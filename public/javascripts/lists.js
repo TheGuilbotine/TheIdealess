@@ -1,4 +1,5 @@
 import { createInput, createDiv } from './utils.js';
+// import {} from './tasks';
 
 const handleListDelete = (listId) => {
   return async () => {
@@ -129,7 +130,32 @@ const handleListAdd = async () => {
       throw res;
     }
 
-    await renderLists();
+    const { list } = await res.json();
+
+    // append lists to left panel and add listener
+    const listsContainer = document.querySelector('.lists__left-panel');
+
+    listsContainer.innerHTML += `
+      <div class='list__container' id='list-${list.id}'>
+        <div class='list__body'>
+          <p class='list__text-${list.id}'>${list.listName}</p>
+          <button id='${list.id}' class='list__delete-button btn btn-secondary'>
+            Delete
+          </button>
+          <button id='${list.id}' class='list__edit-button btn btn-secondary'>
+            Edit
+          </button>
+        </div>
+      </div>
+    `;
+
+    // add listener to edit and add
+    const editButton = document.querySelector(`#list-${list.id}.list__edit-button`);
+    if (editButton) editButton.addEventListener('click', handleListEdit(editButton.id));
+
+    const deleteButton = document.querySelector(`#list-${list.id}.list__delete-button`);
+    if (deleteButton) editButton.addEventListener('click', handleListEdit(deleteButton.id));
+
   } catch (err) {
     console.error(err);
   }
