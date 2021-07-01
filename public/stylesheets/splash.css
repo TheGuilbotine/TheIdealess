@@ -23,6 +23,7 @@
     width: 400px;
     border-radius: 50%;
     margin: auto;
+    display: grid;
 
 }
 
@@ -47,4 +48,13 @@ p {
     height:  100px;
     position: relative;
     top:200px;
+}
+
+.splash-content-text {
+    grid-row-start: 1;
+}
+
+.splash-content-links-logout-register {
+    grid-row-start: 2;
+
 }
