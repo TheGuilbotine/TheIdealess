@@ -24,6 +24,7 @@
     border-radius: 50%;
     margin: auto;
     display: flex;
+    justify-content: center;
 }
 
 .splash-circle {
@@ -54,5 +55,17 @@
 
 .splash-content-links-logout-register {
     grid-row-start: 2;
+
+}
+
+.login-butt:hover {
+    background-color: crimson;
+}
+
+.register-butt {
+
+}
+
+.demo-butt {
 
 }

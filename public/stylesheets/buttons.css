@@ -1,0 +1,89 @@
+.login-butt {
+    background-color: darkgreen;
+    transition: background-color .5s;
+}
+
+.register-butt {
+    background-color: darkgreen;
+    transition: background-color .5s;
+}
+
+.demo-butt {
+    background-color: darkseagreen;
+    transition: background-color .5s;
+}
+
+.login-butt:hover {
+    background-color: rgb(233, 218, 15);
+}
+
+.register-butt:hover {
+    background-color: rgb(233, 218, 15)
+}
+
+.demo-butt:hover {
+    background-color: rgb(28, 238, 9);
+
+}
+
+.login__buttons {
+    background-color: darkseagreen;
+    transition: background-color .5s;
+}
+
+.login__buttons:hover {
+    background-color: rgb(33, 18, 241);
+}
+
+.register__button {
+    background-color: darkseagreen;
+    transition: background-color .5s;
+}
+
+.register__button:hover {
+    background-color: rgb(33, 18, 241);
+}
+
+.cancel__register {
+    background-color: darkseagreen;
+    transition: background-color .5s;
+}
+
+.cancel__register:hover {
+    background-color: rgb(33, 18, 241);
+}
+
+.logout-button {
+    background-color: deeppink;
+    transition: background-color .5s;
+}
+
+.logout-button:hover {
+    background-color: fuchsia;
+}
+
+.task__delete-button {
+    background-color: rgb(186, 10, 221);
+    transition: background-color .5s;
+}
+
+.task__delete-button:hover {
+    background-color: red;
+}
+
+.task__edit-button {
+    background-color: rgb(186, 10, 221);
+    transition: background-color .5s;
+}
+
+.task__edit-button:hover {
+    background-color: rgb(28, 238, 9);
+}
+
+.list__delete-button {
+
+}
+
+.list__edit-button {
+
+}
