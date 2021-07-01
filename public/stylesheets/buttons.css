@@ -26,12 +26,13 @@ button:hover {
 
 .demo-butt {
     background-color: darkseagreen;
-    transition: padding .6s;
+    transition: all .6s;
 }
 
 .demo-butt:hover {
-    background-color: rgb(28, 238, 9);
-    padding: 35PX;
+    background-color: rgb(178, 187, 178);
+    padding: 1px 7px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 .login__buttons {
