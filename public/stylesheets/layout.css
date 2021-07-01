@@ -17,8 +17,10 @@ h1 {
 }
 
 .top-div{
-    background-color: rgb(93, 37, 224);
-    background-color: #fadeaa;
+    background-color: #849799;
+    /* background-color: #fadeaa; */
+    grid-row-start: 1;
+    height:  100px;
 }
 
 .label {
@@ -48,7 +50,7 @@ input{
 }
 
 .error{
-    border: 1px solid black;  
+    border: 1px solid black;
     border-radius: 5px;
     height:auto;
     width:fit-content;
@@ -85,13 +87,9 @@ footer {
 
 li {
     margin: 5px;
-    
+
 }
 
 li::marker {
     color: black
-
-
-
-    
 }

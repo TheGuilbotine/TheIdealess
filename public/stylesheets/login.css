@@ -7,8 +7,8 @@
 
 .top-div-login{
     background-color:rgb(93, 37, 224);
-    border: 1px solid blue;
-    background-color: blue;
+    /* border: 1px solid blue; */
+    background-color: #849799;
     grid-row-start: 1;
     height:  100px;
 }

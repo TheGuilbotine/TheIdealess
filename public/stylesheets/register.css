@@ -2,12 +2,12 @@ body{
     height:auto;
 }
 
-.top-div{
-    border: 1px solid blue;
+/* .top-div{ */
+    /* border: 1px solid blue; */
     /* background-color:blue; */
-    grid-row-start: 1;
-    height:  100px;
-}
+    /* grid-row-start: 1;
+    height:  100px; */
+/* } */
 
 .content__center {
     display: flex;
