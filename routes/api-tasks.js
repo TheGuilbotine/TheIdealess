@@ -84,8 +84,9 @@ router.post("/",
       taskName, 
       note, 
       dueDate, 
+      isCompleted,
+      listId,
       taskTypeId, 
-      listId 
     } = req.body;
 
     const task = await Task.build({
@@ -93,10 +94,12 @@ router.post("/",
       taskName,
       note,
       dueDate,
-      taskTypeId,
+      isCompleted,
       listId,
+      taskTypeId,
     });
 
+    // Authorization if there is time
     // const user = await User.findByPk(req.session.auth.userId, {
     //   include: [List, Task]
     // });
@@ -127,11 +130,11 @@ router.put("/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
     const {
       taskName,
-      // note,
-      // dueDate,
-      // taskTypeId,
-      // listId,
-      // isCompleted,
+      note,
+      dueDate,
+      isCompleted,
+      listId,
+      taskTypeId,
     } = req.body;
 
     const task = await Task.findOne({
@@ -141,11 +144,11 @@ router.put("/:id(\\d+)",
     if (task) {
       await task.update({
         taskName,
-        // note,
-        // dueDate,
-        // taskTypeId,
-        // listId,
-        // isCompleted
+        note,
+        dueDate,
+        isCompleted,
+        listId,
+        taskTypeId,
       });
       res.json({ task });
     } else {

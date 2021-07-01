@@ -1,15 +1,6 @@
-const createInput = (tagName, className, container, label = '', type = 'text') => {
-  const labelTag = `
-    <label for='${tagName}'>${label}</label>
-  `;
-  container.innerHTML += labelTag;
-  const inputTag = `
-    <input type='${type}' name='${tagName}' id='${tagName}' class='${className}'>
-  `;
-  container.innerHTML += inputTag;
-};
+import { createInput, createSelectList } from './utils.js';
 
-const createSelect = (tagName, className, resources, container, label = '') => {
+const createSelectTaskType = (tagName, className, resources, container, label = '') => {
   const labelTag = `
     <label for='${tagName}'>${label}</label>
   `;
@@ -18,17 +9,39 @@ const createSelect = (tagName, className, resources, container, label = '') => {
   let selectTag = `
     <select name='${tagName}' id='${tagName}' class='${className}'>
   `;
-  
-  resources.forEach(({ listName, id }) => {
+
+  resources.forEach(({ id, taskType }) => {
 
     const optionTag = `
-      <option value='${id}'>${listName}</option>
+      <option value='${id}'>${taskType}</option>
     `;
     selectTag += optionTag;
   });
   selectTag += '</select>';
 
   container.innerHTML += selectTag;
+};
+
+const getTaskInputs = () => {
+  const taskAddInput = document.querySelector(".task__add_input");
+  const taskName = taskAddInput.value;
+  const listId = document.querySelector(".task__select_list").value;
+  const taskTypeId = document.querySelector(".task__select_task_types").value;
+  const isCompleted = false;
+  const noteValue = document.querySelector(".task__note_input").value;
+  const note = noteValue === '' ? null : noteValue;
+  const dueDateValue = document.querySelector(".task__due_date_input").value;
+  const dueDate = dueDateValue === '' ? null : dueDateValue;
+
+  return {
+    taskName,
+    note,
+    dueDate,
+    isCompleted,
+    listId,
+    taskTypeId,
+  };
+
 };
 
 const handleTaskDelete = (taskId) => {
@@ -54,8 +67,7 @@ const handleTaskDelete = (taskId) => {
 
 const handleTaskEdit = (taskId) => {
   return async () => {
-    const taskEditInput = document.querySelector(".task__edit_input");
-    const taskEditName = taskEditInput.value;
+    const { taskName, note, dueDate, isCompleted, listId, taskTypeId } = getTaskInputs();
 
     try {
       const res = await fetch(`/api/tasks/${taskId}`, {
@@ -63,14 +75,14 @@ const handleTaskEdit = (taskId) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ taskName: taskEditName }),
+        body: JSON.stringify({ taskName, note, dueDate, isCompleted, listId, taskTypeId }),
       });
 
       if (!res.ok) {
         throw res;
       }
 
-      document.querySelector(`.task__text_${taskId}`).innerHTML = taskEditName;
+      document.querySelector(`.task__text_${taskId}`).innerHTML = taskName;
     } catch (err) {
       console.error(err);
     }
@@ -89,22 +101,37 @@ const renderTasks = async () => {
   const { tasks } = await res.json();
   const tasksContainer = document.querySelector(".right-panel");
   
+
+  // reset container
   tasksContainer.innerHTML = "";
   
+  // create inputs for input to add, and edit
   createInput("taskAddName", "task__add_input", tasksContainer);
   
   const addButton = document.createElement("button");
   addButton.className = "task__add_button";
   addButton.innerHTML = "Add task";
   tasksContainer.append(addButton);
-  
-  createInput("taskEditName", "task__edit_input", tasksContainer);
-  
-  // get the lists
-  const resLists = await fetch("/api/lists");
-  const { lists } = await resLists.json();
 
-  createSelect("taskSelectList", "task__select_list", lists, tasksContainer);
+  
+  // Create select element from lists
+  try {
+    // get the lists
+    const resLists = await fetch("/api/lists");
+    const { lists } = await resLists.json();
+    createSelectList("taskSelectList", "task__select_list", lists, tasksContainer);
+
+    const resTaskTypes = await fetch("/api/task-types");
+    const { taskTypes } = await resTaskTypes.json();
+    createSelectTaskType("taskTypeSelect", "task__select_task_types", taskTypes, tasksContainer);
+  } catch (err) {
+    console.error(err);
+  }
+
+  // note and due date fields
+  createInput("taskNote", "task__note_input", tasksContainer);
+  createInput("taskDueDate", "task__due_date_input", tasksContainer);
+  
 
   const tasksHTML = tasks.map(
     // TODO Add mark checked button
@@ -145,14 +172,13 @@ const renderTasks = async () => {
 };
 
 const handleTaskAdd = async () => {
-  const taskAddInput = document.querySelector(".task__add_input");
-  const taskName = taskAddInput.value;
+  const { taskName, note, dueDate, isCompleted, listId, taskTypeId } = getTaskInputs();
 
   try {
     const res = await fetch("/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ taskName: taskAddName }),
+      body: JSON.stringify({ taskName, note, dueDate, isCompleted, listId, taskTypeId }),
     });
 
     if (!res.ok) {

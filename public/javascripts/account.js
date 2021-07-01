@@ -1,3 +1,5 @@
+import { createInput } from './utils.js';
+
 const handleListDelete = (listId) => {
     return async () => {
       try {
@@ -21,8 +23,8 @@ const handleListDelete = (listId) => {
 
   const handleListEdit = (listId) => {
       return async () => {
-          const listEditInput = document.querySelector('.list__edit_input')
-          console.log(listEditInput)
+          const listEditInput = document.querySelector('.list__add_input')
+
           const listName = listEditInput.value
         try {
           const res = await fetch(`/api/lists/${listId}`, {
@@ -58,26 +60,13 @@ const handleListDelete = (listId) => {
     const listsContainer = document.querySelector('.center-display');
     listsContainer.innerHTML = '';
 
-    const labelField = document.createElement('label');
-    labelField.setAttribute('for', 'listName');
-    listsContainer.append(labelField);
-    const inputField = document.createElement('input');
-    inputField.setAttribute('name', 'listName');
-    inputField.setAttribute('id', 'listName');
-    inputField.type = 'text';
-    inputField.className = 'list__add_input';
-    listsContainer.append(inputField);
+    // create inputs for input to add, and edit
+    createInput("listName", "list__add_input", listsContainer);
+  
     const addButton = document.createElement('button');
     addButton.className = 'list__add_button';
     addButton.innerHTML = 'Add List';
     listsContainer.append(addButton);
-
-    const editField = document.createElement('input');
-    editField.setAttribute('name', 'listName');
-    editField.setAttribute('id', 'listName');
-    editField.type = 'text';
-    editField.className = 'list__edit_input';
-    listsContainer.append(editField);
 
     const listsHTML = lists.map(
       ({ listName, id }) => `
