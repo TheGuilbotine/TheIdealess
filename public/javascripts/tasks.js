@@ -1,89 +1,141 @@
+import { createInput, createSelectList } from './utils.js';
+
+const createSelectTaskType = (tagName, className, resources, container, label = '') => {
+  const labelTag = `
+    <label for='${tagName}'>${label}</label>
+  `;
+  container.innerHTML += labelTag;
+
+  let selectTag = `
+    <select name='${tagName}' id='${tagName}' class='${className}'>
+  `;
+
+  resources.forEach(({ id, taskType }) => {
+
+    const optionTag = `
+      <option value='${id}'>${taskType}</option>
+    `;
+    selectTag += optionTag;
+  });
+  selectTag += '</select>';
+
+  container.innerHTML += selectTag;
+};
+
+const getTaskInputs = () => {
+  const taskAddInput = document.querySelector(".task__add_input");
+  const taskName = taskAddInput.value;
+  const listId = document.querySelector(".task__select_list").value;
+  const taskTypeId = document.querySelector(".task__select_task_types").value;
+  const isCompleted = false;
+  const noteValue = document.querySelector(".task__note_input").value;
+  const note = noteValue === '' ? null : noteValue;
+  const dueDateValue = document.querySelector(".task__due_date_input").value;
+  const dueDate = dueDateValue === '' ? null : dueDateValue;
+
+  return {
+    taskName,
+    note,
+    dueDate,
+    isCompleted,
+    listId,
+    taskTypeId,
+  };
+
+};
+
 const handleTaskDelete = (taskId) => {
-    return async () => {
-        try {
-            const res = await fetch(`/api/tasks/${taskId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+  return async () => {
+    try {
+      const res = await fetch(`/api/tasks/${taskId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-            if (!res.ok) {
-                throw res;
-            }
+      if (!res.ok) {
+        throw res;
+      }
 
-            document.querySelector(`#task-${taskId}`).remove();
-        } catch (err) {
-            console.error(err);
-        }
-    };
+      document.querySelector(`#task-${taskId}`).remove();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 };
 
 const handleTaskEdit = (taskId) => {
-    return async () => {
-        const taskEditInput = document.querySelector('.task__edit_input')
-        console.log(taskEditInput)
-        const taskName = taskEditInput.value
-      try {
-        const res = await fetch(`/api/tasks/${taskId}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({taskName})
-        });
+  return async () => {
+    const { taskName, note, dueDate, isCompleted, listId, taskTypeId } = getTaskInputs();
 
-        if (!res.ok) {
-          throw res;
-        }
+    try {
+      const res = await fetch(`/api/tasks/${taskId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ taskName, note, dueDate, isCompleted, listId, taskTypeId }),
+      });
 
-        document.querySelector(`.task__text_${taskId}`).innerHTML = taskName
-      } catch (err) {
-        console.error(err);
+      if (!res.ok) {
+        throw res;
       }
-    };
+
+      document.querySelector(`.task__text_${taskId}`).innerHTML = taskName;
+    } catch (err) {
+      console.error(err);
+    }
   };
+};
 
 const renderTasks = async () => {
-    // GET tasks
-    console.log('Who cares anymore!!!!')
-    const res = await fetch('/api/tasks')
+  // GET tasks
+  const res = await fetch("/api/tasks");
 
-    if (res.status === 401) {
-        window.location.href = '/login';
-        return;
-    }
+  if (res.status === 401) {
+    window.location.href = "/login";
+    return;
+  }
 
-    const { tasks } = await res.json();
-    console.log(tasks)
-    const tasksContainer = document.querySelector('.right-panel');
+  const { tasks } = await res.json();
+  const tasksContainer = document.querySelector(".right-panel");
+  
 
-    tasksContainer.innerHTML = '';
+  // reset container
+  tasksContainer.innerHTML = "";
+  
+  // create inputs for input to add, and edit
+  createInput("taskAddName", "task__add_input", tasksContainer);
+  
+  const addButton = document.createElement("button");
+  addButton.className = "task__add_button";
+  addButton.innerHTML = "Add task";
+  tasksContainer.append(addButton);
 
-    const labelField = document.createElement('label');
-    labelField.setAttribute('for', 'taskName');
-    tasksContainer.append(labelField);
-    const inputField = document.createElement('input');
-    inputField.setAttribute('name', 'taskName');
-    inputField.setAttribute('id', 'taskName');
-    inputField.type = 'text';
-    inputField.className = 'task__add_input';
-    tasksContainer.append(inputField);
-    const addButton = document.createElement('button');
-    addButton.className = 'task__add_button';
-    addButton.innerHTML = 'Add task';
-    tasksContainer.append(addButton);
+  
+  // Create select element from lists
+  try {
+    // get the lists
+    const resLists = await fetch("/api/lists");
+    const { lists } = await resLists.json();
+    createSelectList("taskSelectList", "task__select_list", lists, tasksContainer);
 
-    const editField = document.createElement('input');
-    editField.setAttribute('name', 'taskName');
-    editField.setAttribute('id', 'taskName');
-    editField.type = 'text';
-    editField.className = 'task__edit_input';
-    tasksContainer.append(editField);
+    const resTaskTypes = await fetch("/api/task-types");
+    const { taskTypes } = await resTaskTypes.json();
+    createSelectTaskType("taskTypeSelect", "task__select_task_types", taskTypes, tasksContainer);
+  } catch (err) {
+    console.error(err);
+  }
 
-    const tasksHTML = tasks.map(
-        // TODO Add mark checked button
-        ({ taskName, id }) => `
+  // note and due date fields
+  createInput("taskNote", "task__note_input", tasksContainer);
+  createInput("taskDueDate", "task__due_date_input", tasksContainer);
+  
+
+  const tasksHTML = tasks.map(
+    // TODO Add mark checked button
+    ({ taskName, id }) => `
         <div class='task__container' id='task-${id}'>
           <div class='task__body'>
             <p class='task__text_${id}'>${taskName}</p>
@@ -96,62 +148,58 @@ const renderTasks = async () => {
           </div>
         </div>
         `
-    );
+  );
 
-    tasksContainer.innerHTML += tasksHTML.join('');
+  tasksContainer.innerHTML += tasksHTML.join("");
 
-    // add event listeners to the delete buttons
-    const deleteTaskButtons = document.querySelectorAll('.task__add_input')
+  // add event listeners to the delete buttons
+  const deleteTaskButtons = document.querySelectorAll(".task__delete_button");
 
-    if (deleteTaskButtons) {
-        deleteTaskButtons.forEach((button) => {
-            button.addEventListener('click', handleTaskDelete(button.id));
-        });
-    }
-    const editTaskButtons = document.querySelectorAll('.task__edit_button')
+  if (deleteTaskButtons) {
+    deleteTaskButtons.forEach((button) => {
+      button.addEventListener("click", handleTaskDelete(button.id));
+    });
+  }
+  const editTaskButtons = document.querySelectorAll(".task__edit_button");
 
-    if(editTaskButtons){
-      editTaskButtons.forEach((button) => {
-          button.addEventListener('click', handleTaskEdit(button.id));
-          console.log(button)
-        });
-    }
+  if (editTaskButtons) {
+    editTaskButtons.forEach((button) => {
+      button.addEventListener("click", handleTaskEdit(button.id));
+    });
+  }
 
-    await addTaskHandler();
+  await addTaskHandler();
 };
 
-
-
 const handleTaskAdd = async () => {
-    const taskAddInput = document.querySelector('.task__add_input');
-    const taskName = taskAddInput.value;
+  const { taskName, note, dueDate, isCompleted, listId, taskTypeId } = getTaskInputs();
 
-    try {
-        const res = await fetch('/api/tasks', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({ taskName }),
-        });
+  try {
+    const res = await fetch("/api/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ taskName, note, dueDate, isCompleted, listId, taskTypeId }),
+    });
 
-        if (!res.ok) {
-            throw res;
-        }
-
-        await renderTasks();
-    } catch (err) {
-        console.error(err);
+    if (!res.ok) {
+      throw res;
     }
+
+    await renderTasks();
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const addTaskHandler = () => {
-    const addTaskButton = document.querySelector('.task__add_button');
-    addTaskButton.addEventListener('click', handleTaskAdd)
+  const addTaskButton = document.querySelector(".task__add_button");
+  addTaskButton.addEventListener("click", handleTaskAdd);
 };
 
-document.addEventListener('DOMContentLoaded', async (e) => {
-    try {
-        await renderTasks();
-    } catch (e) {
-        console.errors(e);
-    }
+document.addEventListener("DOMContentLoaded", async (e) => {
+  try {
+    await renderTasks();
+  } catch (e) {
+    console.errors(e);
+  }
 });
