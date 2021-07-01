@@ -1,0 +1,15 @@
+.footer-top {
+    color: thistle;
+    font-size: large;
+    font-weight: bold;
+}
+
+.name {
+    color: thistle;
+    font-size: large;
+}
+
+a {
+    color: thistle;
+    text-decoration: overline;
+}

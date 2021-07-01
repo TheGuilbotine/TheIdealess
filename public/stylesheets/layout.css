@@ -94,3 +94,8 @@ li {
 li::marker {
     color: black
 }
+
+.explorer-welcome {
+    color: thistle;
+    font-size: large;
+}
