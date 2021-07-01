@@ -1,12 +1,12 @@
 .content__login {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 700px;
 }
 
 .top-div-login{
-    /* border: 1px solid blue; */
     background-color:rgb(93, 37, 224);
-    grid-row-start: 1;
     height:  100px;
 }
 
@@ -16,11 +16,5 @@
    height:fit-content;
    width:fit-content;
    padding: 10px;
-   grid-row-start: 2;
    background-color: white;
-
-}
-
-.login-content {
-    /* position: relative; */
 }
