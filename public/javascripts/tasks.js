@@ -1,4 +1,4 @@
-import { createInput, createSelectList } from './utils.js';
+import { createInput, createSelectList, createDiv } from './utils.js';
 
 const createSelectTaskType = (tagName, className, resources, container, label = '') => {
   const labelTag = `
@@ -99,11 +99,12 @@ const renderTasks = async () => {
   }
 
   const { tasks } = await res.json();
-  const tasksContainer = document.querySelector(".right-panel");
-  
-
+  const centerDisplay = document.querySelector(".center-display");
   // reset container
-  tasksContainer.innerHTML = "";
+  centerDisplay.innerHTML = "";
+  
+  const tasksContainer = createDiv("tasks__center_display");
+  centerDisplay.append(tasksContainer);
   
   // create inputs for input to add, and edit
   createInput("taskAddName", "task__add_input", tasksContainer);
@@ -119,18 +120,18 @@ const renderTasks = async () => {
     // get the lists
     const resLists = await fetch("/api/lists");
     const { lists } = await resLists.json();
-    createSelectList("taskSelectList", "task__select_list", lists, tasksContainer);
+    createSelectList("taskSelectList", "task__select_list", lists, tasksContainer, "List");
 
     const resTaskTypes = await fetch("/api/task-types");
     const { taskTypes } = await resTaskTypes.json();
-    createSelectTaskType("taskTypeSelect", "task__select_task_types", taskTypes, tasksContainer);
+    createSelectTaskType("taskTypeSelect", "task__select_task_types", taskTypes, tasksContainer, "Task Type");
   } catch (err) {
     console.error(err);
   }
 
   // note and due date fields
-  createInput("taskNote", "task__note_input", tasksContainer);
-  createInput("taskDueDate", "task__due_date_input", tasksContainer);
+  createInput("taskNote", "task__note_input", tasksContainer, "Note");
+  createInput("taskDueDate", "task__due_date_input", tasksContainer, "Due Date", "date");
   
 
   const tasksHTML = tasks.map(

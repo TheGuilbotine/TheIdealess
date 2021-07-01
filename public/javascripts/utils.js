@@ -31,4 +31,11 @@ const createSelectList = (tagName, className, resources, container, label = '') 
   container.innerHTML += selectTag;
 };
 
-export { createInput, createSelectList };
+const createDiv = (className) => {
+  const divTag = document.createElement('div');
+  divTag.classList.add(`${className}`)
+
+  return divTag;
+};
+
+export { createInput, createSelectList, createDiv };
