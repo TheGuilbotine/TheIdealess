@@ -35,6 +35,20 @@ const listNotFoundError = (id) => {
   return err;
 };
 
+router.get("/:id(\\d+)",
+  asyncHandler(async (req, res, next) => {
+    const list = await List.findByPk(req.params.id, {
+      include: [Task],
+    });
+
+    if (list) {
+      res.json({ list });
+    } else {
+      next(listNotFoundError(req.params.id));
+    }
+  })
+);
+
 const validateList = [
   check("listName")
   .exists({ checkFalsy: true })

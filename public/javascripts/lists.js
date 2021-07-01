@@ -109,7 +109,6 @@ const renderLists = async () => {
   }
 
   await addListHandler();
-  // await addListHandlerChange();
 
 };
 
@@ -174,11 +173,43 @@ const addListHandler = async () => {
   addListInput.addEventListener('change', handleListAdd);
 };
 
+const handleTaskShow = (listId) => {
+  return async () => {
+    try {
+      const res = await fetch(`/api/lists/${listId}`);
+
+      if (!res.ok) {
+        throw res;
+      }
+
+      // get all the tasks from this list
+      const { list: { Tasks: tasks } } = await res.json();
+      console.log(tasks);
+      // renderTasks(tasks);
+      
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+
+const showTasks = async () => {
+  
+  // add event listeners to the delete buttons
+  const listContainers = document.querySelectorAll(".list__container");
+  if (listContainers) {
+    listContainers.forEach((list) => {
+      list.addEventListener("click", handleTaskShow(list.id.split('-')[1]));
+    });
+  }
+};
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 
   try {
     await renderLists();
+    await showTasks();
   } catch (e) {
     console.error(e);
   }
