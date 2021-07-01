@@ -34,10 +34,11 @@ const validateTask = [
   handleValidationErrors,
 ];
 
-router.get(
-  "/",
+router.get("/",
   asyncHandler(async (req, res) => {
-    const tasks = await Task.findAll();
+    const tasks = await Task.findAll({
+      include: [{ model: List, attributes: ['listName'], distinct: true }],
+    });
     if (tasks) {
       res.json({ tasks });
     } else {
@@ -49,8 +50,7 @@ router.get(
   })
 );
 
-router.get(
-  "/:id(\\d+)",
+router.get("/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
     const task = await Task.findOne({
       where: { id: req.params.id },
@@ -76,12 +76,17 @@ router.get(
   })
 );
 
-router.post(
-  "/",
-  // requireAuth,
+router.post("/",
+  requireAuth,
   validateTask,
   asyncHandler(async (req, res) => {
-    const { taskName, note, dueDate, taskTypeId, listId } = req.body;
+    const { 
+      taskName, 
+      note, 
+      dueDate, 
+      taskTypeId, 
+      listId 
+    } = req.body;
 
     const task = await Task.build({
       userId: req.session.auth.userId,
@@ -116,8 +121,7 @@ router.post(
   })
 );
 
-router.put(
-  "/:id(\\d+)",
+router.put("/:id(\\d+)",
   requireAuth,
   validateTask,
   asyncHandler(async (req, res, next) => {
@@ -129,8 +133,6 @@ router.put(
       // listId,
       // isCompleted,
     } = req.body;
-
-    console.log(taskName, req.params.id);
 
     const task = await Task.findOne({
       where: { id: req.params.id },
@@ -152,8 +154,7 @@ router.put(
   })
 );
 
-router.delete(
-  "/:id(\\d+)",
+router.delete("/:id(\\d+)",
   requireAuth,
   asyncHandler(async (req, res, next) => {
     const { taskName } = req.body;

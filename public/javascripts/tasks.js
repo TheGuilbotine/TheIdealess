@@ -1,3 +1,36 @@
+const createInput = (tagName, className, container, label = '', type = 'text') => {
+  const labelTag = `
+    <label for='${tagName}'>${label}</label>
+  `;
+  container.innerHTML += labelTag;
+  const inputTag = `
+    <input type='${type}' name='${tagName}' id='${tagName}' class='${className}'>
+  `;
+  container.innerHTML += inputTag;
+};
+
+const createSelect = (tagName, className, resources, container, label = '') => {
+  const labelTag = `
+    <label for='${tagName}'>${label}</label>
+  `;
+  container.innerHTML += labelTag;
+
+  let selectTag = `
+    <select name='${tagName}' id='${tagName}' class='${className}'>
+  `;
+  
+  resources.forEach(({ listName, id }) => {
+
+    const optionTag = `
+      <option value='${id}'>${listName}</option>
+    `;
+    selectTag += optionTag;
+  });
+  selectTag += '</select>';
+
+  container.innerHTML += selectTag;
+};
+
 const handleTaskDelete = (taskId) => {
   return async () => {
     try {
@@ -22,23 +55,22 @@ const handleTaskDelete = (taskId) => {
 const handleTaskEdit = (taskId) => {
   return async () => {
     const taskEditInput = document.querySelector(".task__edit_input");
-    console.log(taskEditInput);
-    const taskName = taskEditInput.value;
-    console.log(taskId, taskName);
+    const taskEditName = taskEditInput.value;
+
     try {
       const res = await fetch(`/api/tasks/${taskId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ taskName }),
+        body: JSON.stringify({ taskName: taskEditName }),
       });
 
       if (!res.ok) {
         throw res;
       }
 
-      document.querySelector(`.task__text_${taskId}`).innerHTML = taskName;
+      document.querySelector(`.task__text_${taskId}`).innerHTML = taskEditName;
     } catch (err) {
       console.error(err);
     }
@@ -47,7 +79,6 @@ const handleTaskEdit = (taskId) => {
 
 const renderTasks = async () => {
   // GET tasks
-  console.log("Who cares anymore!!!!");
   const res = await fetch("/api/tasks");
 
   if (res.status === 401) {
@@ -56,31 +87,24 @@ const renderTasks = async () => {
   }
 
   const { tasks } = await res.json();
-  console.log(tasks);
   const tasksContainer = document.querySelector(".right-panel");
-
+  
   tasksContainer.innerHTML = "";
-
-  const labelField = document.createElement("label");
-  labelField.setAttribute("for", "taskName");
-  tasksContainer.append(labelField);
-  const inputField = document.createElement("input");
-  inputField.setAttribute("name", "taskName");
-  inputField.setAttribute("id", "taskName");
-  inputField.type = "text";
-  inputField.className = "task__add_input";
-  tasksContainer.append(inputField);
+  
+  createInput("taskAddName", "task__add_input", tasksContainer);
+  
   const addButton = document.createElement("button");
   addButton.className = "task__add_button";
   addButton.innerHTML = "Add task";
   tasksContainer.append(addButton);
+  
+  createInput("taskEditName", "task__edit_input", tasksContainer);
+  
+  // get the lists
+  const resLists = await fetch("/api/lists");
+  const { lists } = await resLists.json();
 
-  const editField = document.createElement("input");
-  editField.setAttribute("name", "taskName");
-  editField.setAttribute("id", "taskName");
-  editField.type = "text";
-  editField.className = "task__edit_input";
-  tasksContainer.append(editField);
+  createSelect("taskSelectList", "task__select_list", lists, tasksContainer);
 
   const tasksHTML = tasks.map(
     // TODO Add mark checked button
@@ -114,7 +138,6 @@ const renderTasks = async () => {
   if (editTaskButtons) {
     editTaskButtons.forEach((button) => {
       button.addEventListener("click", handleTaskEdit(button.id));
-      console.log(button);
     });
   }
 
@@ -129,7 +152,7 @@ const handleTaskAdd = async () => {
     const res = await fetch("/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ taskName }),
+      body: JSON.stringify({ taskName: taskAddName }),
     });
 
     if (!res.ok) {
