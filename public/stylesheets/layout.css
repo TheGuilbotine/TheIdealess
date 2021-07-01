@@ -1,11 +1,14 @@
 body {
     width: 100%;
+    background-color: #fadeaa;
+}
+
+
 }
 
 .label {
     display: flex;
     justify-content: center;
-
 }
 
 .buttons{
