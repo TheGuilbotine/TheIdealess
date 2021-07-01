@@ -108,6 +108,7 @@ h2 {
 	display: flex;
     justify-content: center;
 	align-items: center;
+    flex-direction: column;
 }
 
 
@@ -122,6 +123,8 @@ h2 {
     display: flex;
 	align-items: center;
     justify-content: flex-end;
+    flex-direction: column;
+    /* overflow: scroll; */
 
 }
 
