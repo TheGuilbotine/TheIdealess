@@ -49,7 +49,7 @@ router.post('/',
   asyncHandler(async (req, res, next) => {
     const { name } = req.body; 
 
-    const tag = await List.create({
+    const tag = await Tag.create({
       name,
     });
 

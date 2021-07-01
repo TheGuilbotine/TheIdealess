@@ -1,6 +1,6 @@
 const express = require("express");
 const { TagJoin } = require("../db/models");
-const { asyncHandler, handleValidationErrors } = require("./utils");
+const { asyncHandler, handleValidationErrors, check } = require("./utils");
 const { requireAuth } = require("../auth");
 
 const router = express.Router();
