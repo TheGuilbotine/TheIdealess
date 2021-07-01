@@ -27,15 +27,6 @@ body{
 
 }
 
-.bottom-div{
-    border: 1px solid blue;
-    background-color:blue;
-    grid-row-start: 3;
-    height:  100px;
-    position: relative;
-    top:183px;
-}
-
 .footer-top {
     display: flex;
     justify-content:center;
