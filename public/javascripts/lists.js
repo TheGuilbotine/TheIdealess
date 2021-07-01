@@ -109,6 +109,7 @@ const renderLists = async () => {
   }
 
   await addListHandler();
+  // await addListHandlerChange();
 
 };
 
@@ -128,7 +129,7 @@ const handleListAdd = async () => {
 
     if (!res.ok) {
       throw res;
-    }
+    } else listAddInput.value = '';
 
     const { list } = await res.json();
 
@@ -150,11 +151,15 @@ const handleListAdd = async () => {
     `;
 
     // add listener to edit and add
-    const editButton = document.querySelector(`#list-${list.id}.list__edit-button`);
+    const editButton = document.querySelector(`#list-${list.id} .list__edit-button`);
+    console.log(editButton);
+    console.log(editButton.id);
     if (editButton) editButton.addEventListener('click', handleListEdit(editButton.id));
 
-    const deleteButton = document.querySelector(`#list-${list.id}.list__delete-button`);
-    if (deleteButton) editButton.addEventListener('click', handleListEdit(deleteButton.id));
+    const deleteButton = document.querySelector(`#list-${list.id} .list__delete-button`);
+    console.log(deleteButton);
+    console.log(deleteButton.id);
+    if (deleteButton) deleteButton.addEventListener('click', handleListDelete(deleteButton.id));
 
   } catch (err) {
     console.error(err);
@@ -163,8 +168,10 @@ const handleListAdd = async () => {
 
 const addListHandler = async () => {
   const addListButton = document.querySelector('.list__add-button');
+  const addListInput = document.querySelector('.list__add-input');
 
   addListButton.addEventListener('click', handleListAdd);
+  addListInput.addEventListener('change', handleListAdd);
 };
 
 
