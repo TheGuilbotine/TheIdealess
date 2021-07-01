@@ -57,3 +57,15 @@
     grid-row-start: 2;
 
 }
+
+.login-butt:hover {
+    background-color: crimson;
+}
+
+.register-butt {
+
+}
+
+.demo-butt {
+
+}
