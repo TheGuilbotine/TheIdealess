@@ -14,7 +14,7 @@ const allTagsNotFoundError = () => {
 };
 
 router.get("/",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res, next) => {
     const tags = await Tag.findAll();
     if (tags) {
@@ -39,12 +39,22 @@ const validateTag = [
   .withMessage("Tag name can't be empty."),
   check("name")
   .isLength({ max: 60 })
-  .withMessage("Tag name can't be longer than 60 characters."),
+  .withMessage("Tag name can't be longer than 60 characters.")
+  .custom((value) => {
+      return Tag.findOne({
+        where: { name: value }
+      })
+        .then((tag) => {
+          if (tag) {
+            return Promise.reject('Sorry this tag is already in use')
+          }
+        });
+    }),
   handleValidationErrors,
 ];
 
 router.post('/',
-  // requireAuth, //! require authentication for production
+  requireAuth, 
   validateTag,
   asyncHandler(async (req, res, next) => {
     const { name } = req.body; 

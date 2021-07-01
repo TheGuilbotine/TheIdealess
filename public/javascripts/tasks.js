@@ -1,4 +1,5 @@
 import { createInput, createSelectList, createDiv } from './utils.js';
+import { handleTags, handleTagAdd } from './tags.js';
 
 const createSelectTaskType = (tagName, className, resources, container, label = '') => {
   const labelTag = `
@@ -87,42 +88,6 @@ const handleTaskEdit = (taskId) => {
   };
 };
 
-const handleTagAdd = (taskId) => {
-  return async (event) => {
-    try {
-      const name = event.target.value;
-      const resTag = await fetch(`/api/tags`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name }),
-      })
-
-      if (!resTag.ok) {
-        throw resTag; 
-      } else {
-        event.target.value = '';
-      }
-
-      const tag = await resTag.json();
-      const tagId = tag.id;
-      const resTagJoin = await fetch(`api/tag-joins`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ tagId, taskId }),
-      })
-
-      if (!resTagJoin.ok) throw resTag; 
-
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
-
 const renderTasks = async () => {
   // GET tasks
   const res = await fetch("/api/tasks");
@@ -180,7 +145,7 @@ const renderTasks = async () => {
             <button id='${id}' class='task__edit-button btn btn-secondary'>
                 Edit
             </button>
-            <div class='task__tag-container'>
+            <div class='task__tag-container' id='${id}'>
               <label for='task__add-tag-label'>Add Tag</label>
               <input id='${id}' class='task__add-tag-input'>
             </div>
@@ -243,6 +208,7 @@ const addTaskHandler = () => {
 document.addEventListener("DOMContentLoaded", async (e) => {
   try {
     await renderTasks();
+    handleTags();
   } catch (e) {
     console.errors(e);
   }

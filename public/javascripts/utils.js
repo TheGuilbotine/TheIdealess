@@ -38,4 +38,11 @@ const createDiv = (className) => {
   return divTag;
 };
 
-export { createInput, createSelectList, createDiv };
+const createSpan = (className) => {
+  const spanTag = document.createElement('span');
+  spanTag.classList.add(`${className}`)
+
+  return spanTag;
+};
+
+export { createInput, createSelectList, createDiv, createSpan };

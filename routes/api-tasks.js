@@ -1,8 +1,8 @@
 const express = require("express");
-const { User, List, Task, TagJoin, Tag } = require("../db/models");
+const { List, Task, Tag } = require("../db/models");
 const { asyncHandler, handleValidationErrors, check } = require("./utils");
 const { requireAuth } = require("../auth");
-const { validationResult } = require("express-validator");
+// const { validationResult } = require("express-validator");
 
 const router = express.Router();
 
@@ -35,6 +35,7 @@ const validateTask = [
 ];
 
 router.get("/",
+  requireAuth,
   asyncHandler(async (req, res) => {
     const tasks = await Task.findAll({
       include: [{ model: List, attributes: ['listName'], distinct: true }],
@@ -52,24 +53,12 @@ router.get("/",
 
 router.get("/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
-    const task = await Task.findOne({
-      where: { id: req.params.id },
-      // Might not need both Tag and TagJoin models
-      include: [List, TaskType, Tag, TagJoin],
+    const task = await Task.findByPk(req.params.id, {
+      include: [Tag],
     });
+
     if (task) {
-      res.json({
-        taskId: task.id,
-        taskName: task.taskName,
-        note: task.note,
-        dueDate: task.dueDate,
-        taskTypeId: task.taskTypeId,
-        listId: task.listId,
-        // Unsure if this is the correct way to connect.
-        tagId: task.TagJoins.tagId,
-        list: task.List.listName,
-        type: task.TaskType.taskType,
-      });
+      res.json({ task });
     } else {
       next(taskNotFoundError(req.params.id));
     }
