@@ -1,27 +1,5 @@
-import { createInput, createSelectList, createDiv } from './utils.js';
+import { createInput, createSelectList, createDiv, createSelectTaskType, createHeader } from './utils.js';
 import { handleTags, handleTagAdd } from './tags.js';
-
-const createSelectTaskType = (tagName, className, resources, container, label = '') => {
-  const labelTag = `
-    <label for='${tagName}'>${label}</label>
-  `;
-  container.innerHTML += labelTag;
-
-  let selectTag = `
-    <select name='${tagName}' id='${tagName}' class='${className}'>
-  `;
-
-  resources.forEach(({ id, taskType }) => {
-
-    const optionTag = `
-      <option value='${id}'>${taskType}</option>
-    `;
-    selectTag += optionTag;
-  });
-  selectTag += '</select>';
-
-  container.innerHTML += selectTag;
-};
 
 const getTaskInputs = () => {
   const taskAddInput = document.querySelector(".task__add-input");
@@ -101,17 +79,23 @@ const renderTasks = async () => {
   const centerDisplay = document.querySelector(".center-display");
   // reset container
   centerDisplay.innerHTML = "";
+
   
+  const tasksInputContainer = createDiv("tasks__input-add");
   const tasksContainer = createDiv("tasks__center-display");
   centerDisplay.append(tasksContainer);
+
+  // create header
+  const headerTag = createHeader("Tasks", "tasks__header");
+  tasksContainer.append(headerTag);
   
   // create inputs for input to add, and edit
-  createInput("taskAddName", "task__add-input", tasksContainer);
+  createInput("taskAddName", "task__add-input", tasksInputContainer, "Task Name", "task__input-div");
   
   const addButton = document.createElement("button");
   addButton.className = "task__add-button";
   addButton.innerHTML = "Add task";
-  tasksContainer.append(addButton);
+  tasksInputContainer.append(addButton);
 
   
   // Create select element from lists
@@ -119,18 +103,19 @@ const renderTasks = async () => {
     // get the lists
     const resLists = await fetch("/api/lists");
     const { lists } = await resLists.json();
-    createSelectList("taskSelectList", "task__select-list", lists, tasksContainer, "List");
+    createSelectList("taskSelectList", "task__select-list", lists, tasksInputContainer, "List", "task__select-div");
 
     const resTaskTypes = await fetch("/api/task-types");
     const { taskTypes } = await resTaskTypes.json();
-    createSelectTaskType("taskTypeSelect", "task__select-task-types", taskTypes, tasksContainer, "Task Type");
+    createSelectTaskType("taskTypeSelect", "task__select-task-types", taskTypes, tasksInputContainer, "Task Type", "task__select-div");
   } catch (err) {
     console.error(err);
   }
 
   // note and due date fields
-  createInput("taskNote", "task__note-input", tasksContainer, "Note");
-  createInput("taskDueDate", "task__due-date-input", tasksContainer, "Due Date", "date");
+  createInput("taskNote", "task__note-input", tasksInputContainer, "Note", "task__input-div");
+  createInput("taskDueDate", "task__due-date-input", tasksInputContainer, "Due Date", "task__input-div");
+  tasksContainer.append(tasksInputContainer);
   
 
   const tasksHTML = tasks.map(
@@ -138,16 +123,20 @@ const renderTasks = async () => {
     ({ taskName, id }) => `
         <div class='task__container' id='task-${id}'>
           <div class='task__body'>
-            <p class='task__text-${id}'>${taskName}</p>
-            <button id='${id}' class='task__delete-button btn btn-secondary'>
-              Delete
-            </button>
-            <button id='${id}' class='task__edit-button btn btn-secondary'>
-                Edit
-            </button>
+            <div class='task__text task__text-${id}'>
+              ${taskName}
+            </div>
             <div class='task__tag-container' id='${id}'>
-              <label for='task__add-tag-label'>Add Tag</label>
-              <input id='${id}' class='task__add-tag-input'>
+            <label for='task__add-tag-label'>Add Tag</label>
+            <input id='${id}' class='task__add-tag-input'>
+            </div>
+            <div class='task__btn'>
+              <button id='${id}' class='task__delete-button btn btn-secondary'>
+                Delete
+              </button>
+              <button id='${id}' class='task__edit-button btn btn-secondary'>
+                  Edit
+              </button>
             </div>
           </div>
         </div>
