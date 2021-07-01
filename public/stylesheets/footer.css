@@ -1,15 +1,24 @@
 .footer-top {
     color: thistle;
-    font-size: large;
+    font-size: x-large;
     font-weight: bold;
 }
 
 .name {
     color: thistle;
     font-size: large;
+    padding-bottom: 3px;
 }
 
-a {
+.name__link {
     color: thistle;
-    text-decoration: overline;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    padding: 2px;
+    transition: all 1s;
+    border-radius: 13px;
+}
+
+.name__link:hover {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    background-color: #999fa0;
 }

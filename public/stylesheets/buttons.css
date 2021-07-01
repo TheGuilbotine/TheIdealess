@@ -40,7 +40,11 @@ button:hover {
 }
 
 .login__buttons:hover {
-    background-color: rgb(33, 18, 241);
+    background-color: rgb(90, 81, 224);
+}
+
+.cancel__login:hover {
+    background-color: rgb(252, 101, 14);
 }
 
 .register__button {
@@ -49,7 +53,7 @@ button:hover {
 }
 
 .register__button:hover {
-    background-color: rgb(33, 18, 241);
+    background-color: rgb(90, 81, 224);
 }
 
 .cancel__register {
@@ -58,7 +62,7 @@ button:hover {
 }
 
 .cancel__register:hover {
-    background-color: rgb(33, 18, 241);
+    background-color: rgb(252, 101, 14);
 }
 
 .logout-button {
