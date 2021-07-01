@@ -64,7 +64,7 @@ const renderLists = async () => {
   
 
   // create inputs for input to add, and edit
-  createInput("listName", "list__add-input", listsContainer);
+  createInput("listName", "list__add-input", listsContainer, "List Name", "list__input-div");
 
   const addButton = document.createElement('button');
   addButton.className = 'list__add-button';

@@ -1,19 +1,45 @@
-const createInput = (tagName, className, container, label = '', type = 'text') => {
+const createDiv = (className = '') => {
+  const divTag = document.createElement('div');
+  divTag.classList.add(`${className}`)
+
+  return divTag;
+};
+
+const createSpan = (className = '') => {
+  const spanTag = document.createElement('span');
+  spanTag.classList.add(`${className}`);
+
+  return spanTag;
+};
+
+const createHeader = (label, className = '') => {
+  const hTag = document.createElement('h3');
+  hTag.classList.add(`${className}`);
+  hTag.innerHTML = label;
+
+  return hTag;
+};
+
+const createInput = (tagName, className, container, label = '', parentClass = '', type = 'text') => {
+  const divTag = createDiv(parentClass);
   const labelTag = `
     <label for='${tagName}'>${label}</label>
   `;
-  container.innerHTML += labelTag;
+  divTag.innerHTML += labelTag;
   const inputTag = `
     <input type='${type}' name='${tagName}' id='${tagName}' class='${className}'>
   `;
-  container.innerHTML += inputTag;
+
+  divTag.innerHTML += inputTag;
+  container.append(divTag);
 };
 
-const createSelectList = (tagName, className, resources, container, label = '') => {
+const createSelectList = (tagName, className, resources, container, label = '', parentClass = '') => {
+  const divTag = createDiv(parentClass);
   const labelTag = `
     <label for='${tagName}'>${label}</label>
   `;
-  container.innerHTML += labelTag;
+  divTag.innerHTML += labelTag;
 
   let selectTag = `
     <select name='${tagName}' id='${tagName}' class='${className}'>
@@ -28,21 +54,39 @@ const createSelectList = (tagName, className, resources, container, label = '') 
   });
   selectTag += '</select>';
 
-  container.innerHTML += selectTag;
+  divTag.innerHTML += selectTag;
+  container.append(divTag);
 };
 
-const createDiv = (className) => {
-  const divTag = document.createElement('div');
-  divTag.classList.add(`${className}`)
+const createSelectTaskType = (tagName, className, resources, container, label = '', parentClass = '') => {
+  const divTag = createDiv(parentClass);
+  const labelTag = `
+    <label for='${tagName}'>${label}</label>
+  `;
+  divTag.innerHTML += labelTag;
 
-  return divTag;
+  let selectTag = `
+    <select name='${tagName}' id='${tagName}' class='${className}'>
+  `;
+
+  resources.forEach(({ id, taskType }) => {
+
+    const optionTag = `
+      <option value='${id}'>${taskType}</option>
+    `;
+    selectTag += optionTag;
+  });
+  selectTag += '</select>';
+
+  divTag.innerHTML += selectTag;
+  container.append(divTag);
 };
 
-const createSpan = (className) => {
-  const spanTag = document.createElement('span');
-  spanTag.classList.add(`${className}`)
-
-  return spanTag;
+export { 
+  createInput, 
+  createSelectList, 
+  createDiv, 
+  createSpan, 
+  createSelectTaskType, 
+  createHeader,
 };
-
-export { createInput, createSelectList, createDiv, createSpan };
