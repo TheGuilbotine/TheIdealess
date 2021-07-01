@@ -5,13 +5,16 @@ body {
 .label {
     display: flex;
     justify-content: center;
+    margin: 5px;
 
 }
+
 
 .buttons{
     display: flex;
     justify-content: space-around;
     padding-top: 5px;
+    font-size: medium;
 }
 
 .content {
@@ -21,16 +24,31 @@ body {
 
 }
 
+input{
+    margin: 5px;
+}
+
 .error {
     border: 1px solid black;
     border-radius: 5px;
     height:fit-content;
     width:fit-content;
     background-color: white;
-    color: red;
 
 }
 
 .error-header {
     color: black;
+}
+
+ul{
+    list-style-type: square;
+    list-style-type: style color black;
+    margin: 20px;
+    grid-row-start: 2;
+}
+
+li {
+    margin: 5px;
+    color: red;
 }

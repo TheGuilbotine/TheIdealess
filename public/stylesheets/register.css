@@ -11,6 +11,7 @@ body{
 .content__center {
     display: flex;
     justify-content: center;
+    grid-template-rows: 40px 4em 40px;
 
 }
 
@@ -26,6 +27,9 @@ body{
 
 }
 
+.register__button {
+    font-size: medium;
+}
 .bottom-div{
     border: 1px solid blue;
     background-color:blue;
@@ -70,9 +74,12 @@ footer {
 
 a {
     text-decoration: none;
-    color:black
+    color:black;
+    font-size: 16px;
 }
+
 .name {
     display: flex;
     justify-content:center;
 }
+
