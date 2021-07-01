@@ -1,3 +1,9 @@
+html {
+    background-image: url('slplashBkg.jpg');
+    background-repeat: no-repeat ;
+    
+
+}
 .top-border{
     height: 30px;
     width: auto;
@@ -7,23 +13,27 @@
 
 }
 
-.world-clocks {
+/* .world-clocks {
     border: 1px solid black ;
     height: 70px;
     width: 70px;
     margin: 10px;
     display: inline-flex;
 
-}
+} */
 
 .splash-content {
-    grid-row-start: 2;
-    border: 1px solid black;
+    /* grid-row-start: 2; */
+    /* border: 1px solid black;  */
     height: 300px;
     width: 400px;
     border-radius: 50%;
     margin: auto;
     display: flex;
+    position: fixed;
+    top:350px;
+    left: 760px;
+
 }
 
 .splash-circle {
@@ -36,12 +46,25 @@
     display: flex;
 }
 
+.login-butt {
+    margin: 5px;
+}
+
+.register-butt {
+    margin: 5px;
+}
+
+h1 {
+    color: black;
+}
+
 .splash-content-text {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
     align-items: center;
+    
 }
 
 .splash-welcome {
