@@ -15,7 +15,9 @@ const demoRouter = require('./routes/demo');
 const logoutRouter = require('./routes/logout');
 const apiListRouter = require('./routes/api-lists');
 const apiTaskRouter = require('./routes/api-tasks');
-const apiTaskTypeRouter = require('./routes/api-tasktype');
+const apiTaskTypeRouter = require('./routes/api-task-types');
+const apiTagsRouter = require('./routes/api-tags');
+const apiTagJoinsRouter = require('./routes/api-tag-joins');
 
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
@@ -58,6 +60,8 @@ app.use('/logout', logoutRouter);
 app.use('/api/lists', apiListRouter);
 app.use('/api/tasks', apiTaskRouter);
 app.use('/api/task-types', apiTaskTypeRouter);
+app.use('/api/tags', apiTagsRouter);
+app.use('/api/tag-joins', apiTagJoinsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
