@@ -2,9 +2,10 @@
     display: flex;
     justify-content: center;
 }
+
 .top-div-login{
-    border: 1px solid blue;
-    background-color:blue;
+    /* border: 1px solid blue; */
+    background-color:rgb(93, 37, 224);
     grid-row-start: 1;
     height:  100px;
 }
@@ -16,20 +17,10 @@
    width:fit-content;
    padding: 10px;
    grid-row-start: 2;
-
    background-color: white;
 
 }
 
 .login-content {
     /* position: relative; */
-}
-
-.bottom-div-login{
-    border: 1px solid blue;
-    background-color:blue;
-    grid-row-start: 3;
-    height:  100px;
-    position: relative;
-    top:26px;
 }

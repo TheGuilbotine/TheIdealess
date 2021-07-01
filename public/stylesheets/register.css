@@ -1,9 +1,10 @@
 body{
-    height:600px;
+    height:auto;
 }
+
 .top-div{
     border: 1px solid blue;
-    background-color:blue;
+    /* background-color:blue; */
     grid-row-start: 1;
     height:  100px;
 }
@@ -33,17 +34,6 @@ body{
     height:  100px;
     position: relative;
     top:183px;
-}
-
-footer {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-	grid-template-columns: auto;
-    height: 15vh;
-    background-color: #849799;
-    color: black;
-    align-items: center;
-
 }
 
 .footer-top {

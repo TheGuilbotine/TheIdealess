@@ -1,10 +1,4 @@
-html {
-    max-width: auto;
-}
-body {
-    background-color: #FFF1D0;
 
-}
 
 h2 {
     display: flex;
@@ -125,15 +119,6 @@ h2 {
 	align-items: center;
     justify-content: flex-end;
     flex-direction: column;
-}
-
-.footer {
-    height: 100px;
-    border: 2px solid black;
-    margin: 30px;
-    /* display: flex;
-    align-content: center;
-    flex-direction: column; */
 }
 
 .tasks__center_display {
