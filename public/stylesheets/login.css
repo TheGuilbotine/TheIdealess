@@ -5,15 +5,15 @@
     height:  100px;
 }
 
-/* .logo { <-- not displaying
+ /* .logo { <-- needs more adjustment 
     border: 1px solid black;
     height: 85px;
     width: 100px;
     display: flex;
     justify-content: center;
     margin: 5px;
-    background-image: url('../../photos/taylors-logos.png');
-} */
+    background-image: url('../../photos/whatsNextLogo.png');
+}  */
 
 
 .content__login {
