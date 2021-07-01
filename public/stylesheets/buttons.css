@@ -26,7 +26,7 @@ button:hover {
 
 .demo-butt {
     background-color: darkseagreen;
-    transition: all .6s;
+    transition: all 1.2s;
 }
 
 .demo-butt:hover {
