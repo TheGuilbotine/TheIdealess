@@ -1,33 +1,35 @@
-
+.content__login {
+    display: flex;
+    justify-content: center;
+}
 .top-div-login{
     border: 1px solid blue;
-    background-color:blue; 
-    grid-row-start: 1; 
+    background-color:blue;
+    grid-row-start: 1;
     height:  100px;
 }
 
 .login-form{
-   border: 1px solid black; 
+   border: 1px solid black;
    border-radius: 10px;
    height:fit-content;
    width:fit-content;
    padding: 10px;
    grid-row-start: 2;
- 
+
    background-color: white;
-   
+
 }
 
 .login-content {
-    position: relative;
-    left: 
+    /* position: relative; */
 }
 
 .bottom-div-login{
     border: 1px solid blue;
-    background-color:blue; 
-    grid-row-start: 3; 
+    background-color:blue;
+    grid-row-start: 3;
     height:  100px;
     position: relative;
-    top:26px; 
+    top:26px;
 }
