@@ -1,15 +1,16 @@
+html {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(245, 156, 39);
+}
+
 body {
     display: flex;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     flex-direction: column;
 }
 
-html {
-    max-width: 100%;
-    max-height: 100%;
-    background-color: rgb(245, 156, 39);
-}
 
 h1 {
     color: #555555;
