@@ -80,7 +80,7 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: auto;
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 
@@ -112,8 +112,8 @@ h2 {
     grid-column-start: 3;
 	grid-row-start: 1;
     border: 1px solid black;
-    /* height: 600px;
-    width: 300px; */
+    height: auto;
+    min-width: 300px; 
     margin-top: 40px;
     margin-left: 100px;
     display: flex;
