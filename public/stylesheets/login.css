@@ -53,3 +53,9 @@
 .login__buttons {
     font-size: medium;
 }
+
+.error-header {
+    position: relative;
+    left:auto;
+    margin: 10px;
+}

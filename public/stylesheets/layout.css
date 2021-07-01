@@ -24,12 +24,15 @@ h1 {
 .label {
     display: flex;
     justify-content: center;
+    margin: 5px;
 }
+
 
 .buttons{
     display: flex;
     justify-content: space-around;
     padding-top: 5px;
+    font-size: medium;
 }
 
 .content {
@@ -40,18 +43,29 @@ h1 {
 
 }
 
-.error {
-    border: 1px solid black;
+input{
+    margin: 5px;
+}
+
+.error{
+    border: 1px solid black;  
     border-radius: 5px;
-    height:fit-content;
+    height:auto;
     width:fit-content;
-    background-color: white;
-    color: red;
+    background-color:rgb(245, 111, 107);
 
 }
 
 .error-header {
     color: black;
+
+}
+
+ul{
+    list-style-type: square;
+    list-style-type: style color black;
+    margin: 20px;
+    grid-row-start: 2;
 }
 
 footer {
@@ -67,4 +81,17 @@ footer {
 
 .footer {
     height: 100%;
+}
+
+li {
+    margin: 5px;
+    
+}
+
+li::marker {
+    color: black
+
+
+
+    
 }
