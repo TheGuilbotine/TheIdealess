@@ -4,7 +4,7 @@ button {
 }
 
 button:hover {
-    /* padding: 2px 12px; */
+    /*  */
 }
 
 .login-butt {
@@ -63,13 +63,14 @@ button:hover {
 
 .logout-button {
     background-color: rgb(252, 207, 86);
-    transition: padding .3s;
+    transition: all .7s;
 
 }
 
 .logout-button:hover {
     background-color: rgb(0, 174, 255);
     padding: 20px;
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
 }
 
 .task__delete-button {
@@ -79,7 +80,7 @@ button:hover {
 
 .task__delete-button:hover {
     background-color: red;
-    padding: 2px 12px;
+
 }
 
 .task__edit-button {
@@ -98,7 +99,7 @@ button:hover {
 
 .task__edit-button:hover {
     background-color: rgb(28, 238, 9);
-    padding: 2px 12px;
+
 }
 
 .list__delete-button {
@@ -117,12 +118,12 @@ button:hover {
 }
 .list__delete-button:hover {
     background-color: red;
-    padding: 2px 12px;
+
 }
 
 .list__edit-button:hover {
     background-color: rgb(28, 238, 9);
-    padding: 2px 12px;
+
 }
 
 .list__add-button:hover {
