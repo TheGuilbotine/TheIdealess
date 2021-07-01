@@ -3,15 +3,19 @@ body{
 }
 .top-div{
     border: 1px solid blue;
-    background-color:blue; 
-    grid-row-start: 1; 
+    background-color:blue;
+    grid-row-start: 1;
     height:  100px;
 }
 
+.content__center {
+    display: flex;
+    justify-content: center;
 
+}
 
 .register-form {
-   border: 1px solid black; 
+   border: 1px solid black;
    border-radius: 10px;
    height:fit-content;
    width:fit-content;
@@ -19,16 +23,16 @@ body{
    grid-row-start: 2;
    display:block;
    background-color: white;
-   
+
 }
 
 .bottom-div{
     border: 1px solid blue;
-    background-color:blue; 
-    grid-row-start: 3; 
+    background-color:blue;
+    grid-row-start: 3;
     height:  100px;
     position: relative;
-    top:183px; 
+    top:183px;
 }
 
 footer {
@@ -39,28 +43,28 @@ footer {
     background-color: #849799;
     color: black;
     align-items: center;
-    
+
 }
 
 .footer-top {
-    display: flex; 
-    justify-content:center; 
+    display: flex;
+    justify-content:center;
 }
 
 .footer-bottom {
-     
+
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: auto;
     height: auto;
-    
-    
+
+
 }
 
 .footer__bottom-icons{
-    display:flex; 
+    display:flex;
     justify-content: space-around;
-   
+
 
 }
 
@@ -69,8 +73,6 @@ a {
     color:black
 }
 .name {
-    display: flex; 
+    display: flex;
     justify-content:center;
 }
-
-
