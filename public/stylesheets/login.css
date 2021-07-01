@@ -1,6 +1,7 @@
 .content__login {
     display: flex;
     justify-content: center;
+    margin: 300px;
 }
 .top-div-login{
     border: 1px solid blue;
@@ -21,9 +22,6 @@
 
 }
 
-.login-content {
-    /* position: relative; */
-}
 
 .bottom-div-login{
     border: 1px solid blue;
@@ -33,3 +31,10 @@
     position: relative;
     top:26px;
 }
+
+
+.login__buttons {
+    font-size: medium;
+}
+
+
