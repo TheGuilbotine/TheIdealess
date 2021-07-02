@@ -7,6 +7,9 @@ module.exports = {
       { listName: 'What to do in LA', userId: 2, createdAt: new Date(), updatedAt: new Date() },
       { listName: '10 common Portuguese Phrases!', userId: 3, createdAt: new Date(), updatedAt: new Date() },
       { listName: 'Food I love', userId: 4, createdAt: new Date(), updatedAt: new Date() },
+      { listName: '10 common Italian Phrases', userId: 5, createdAt: new Date(), updatedAt: new Date() },
+      { listName: 'Venice Trip', userId: 5, createdAt: new Date(), updatedAt: new Date() },
+      { listName: 'Off The Beaten Path', userId: 5, createdAt: new Date(), updatedAt: new Date() },
     ], {});
   },
 
