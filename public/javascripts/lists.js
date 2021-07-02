@@ -1,4 +1,5 @@
 import { createInput, createDiv } from './utils.js';
+import { renderTasks } from './tasks.js';
 
 const handleListDelete = (listId) => {
   return async () => {
@@ -127,9 +128,34 @@ const handleListAdd = async () => {
 
     if (!res.ok) {
       throw res;
-    }
+    } else listAddInput.value = '';
 
-    await renderLists();
+    const { list } = await res.json();
+
+    // append lists to left panel and add listener
+    const listsContainer = document.querySelector('.lists__left-panel');
+
+    listsContainer.innerHTML += `
+      <div class='list__container' id='list-${list.id}'>
+        <div class='list__body'>
+          <p class='list__text-${list.id}'>${list.listName}</p>
+          <button id='${list.id}' class='list__delete-button btn btn-secondary'>
+            Delete
+          </button>
+          <button id='${list.id}' class='list__edit-button btn btn-secondary'>
+            Edit
+          </button>
+        </div>
+      </div>
+    `;
+
+    // add listener to edit and add
+    const editButton = document.querySelector(`#list-${list.id} .list__edit-button`);
+    if (editButton) editButton.addEventListener('click', handleListEdit(editButton.id));
+
+    const deleteButton = document.querySelector(`#list-${list.id} .list__delete-button`);
+    if (deleteButton) deleteButton.addEventListener('click', handleListDelete(deleteButton.id));
+
   } catch (err) {
     console.error(err);
   }
@@ -137,15 +163,49 @@ const handleListAdd = async () => {
 
 const addListHandler = async () => {
   const addListButton = document.querySelector('.list__add-button');
+  const addListInput = document.querySelector('.list__add-input');
 
   addListButton.addEventListener('click', handleListAdd);
+  addListInput.addEventListener('change', handleListAdd);
 };
 
+const handleTaskShow = (listId) => {
+  return async () => {
+    try {
+      const res = await fetch(`/api/lists/${listId}`);
+
+      if (!res.ok) {
+        throw res;
+      }
+
+      // get all the tasks from this list
+      const { list: { Tasks: tasks } } = await res.json();
+
+      renderTasks(tasks, listId);
+      
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+
+const showTasks = async () => {
+  
+  // add event listeners to the delete buttons
+  const listContainers = document.querySelectorAll(".list__container");
+  if (listContainers) {
+    listContainers.forEach((list) => {
+      list.addEventListener("click", handleTaskShow(list.id.split('-')[1]));
+    });
+  }
+};
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 
   try {
     await renderLists();
+    await showTasks();
   } catch (e) {
     console.error(e);
   }
