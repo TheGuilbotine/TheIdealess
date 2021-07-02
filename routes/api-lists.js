@@ -67,12 +67,13 @@ asyncHandler(async (req, res, next) => {
   const { listName } = req.body; //! use for production on browser
   //const { listName, userId } = req.body; //! use for testing in POSTMAN
 
-  const list = await List.create({
+  const list = await List.build({
     listName,
     userId,
   });
 
   if (list) {
+    await list.save();
     res.json({ list })
   } else {
     next(listNotFoundError(req.params.id));
@@ -81,7 +82,7 @@ asyncHandler(async (req, res, next) => {
 
 // only change the list id
 router.put('/:id(\\d+)',
-requireAuth, //! require authentication for production
+requireAuth, validateList, //! require authentication for production
 asyncHandler(async (req, res, next) => {
   const { listName } = req.body;
   const list = await List.findByPk(req.params.id);
