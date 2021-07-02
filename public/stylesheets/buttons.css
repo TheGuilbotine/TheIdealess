@@ -1,6 +1,6 @@
 button {
     border-radius: 13%;
-    transition: background-color .3s;
+    transition: all .3s;
 }
 
 button:hover {
@@ -18,10 +18,12 @@ button:hover {
 
 .login-butt:hover {
     background-color: rgb(233, 218, 15);
+    color: rgb(19, 18, 18);
 }
 
 .register-butt:hover {
-    background-color: rgb(233, 218, 15)
+    background-color: rgb(233, 218, 15);
+    color: rgb(19, 18, 18);
 }
 
 .demo-butt {
@@ -37,6 +39,7 @@ button:hover {
 
 .login__buttons {
     background-color: darkseagreen;
+    color: black;
 
 }
 

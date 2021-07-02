@@ -23,3 +23,8 @@
     background-color: rgb(132, 95, 218);
     /* color: rgb(57, 13, 160); */
 }
+
+.footer__bottom-icons {
+    display: flex;
+    justify-content: center;
+}

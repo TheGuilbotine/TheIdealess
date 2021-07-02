@@ -18,10 +18,10 @@
 
 .splash-content {
     grid-row-start: 2;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 300px;
     width: 400px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     margin: auto;
     display: flex;
     justify-content: center;
@@ -43,6 +43,7 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    /* background-image: src('../photos/samiras-logo.png'); */
 }
 
 .splash-welcome {
