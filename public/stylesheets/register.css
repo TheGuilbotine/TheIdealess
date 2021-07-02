@@ -29,6 +29,16 @@
     top:183px;
 }
 
+/* footer {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: auto;
+    height: 15vh;
+    color: black;
+    align-items: center;
+
+} */
+
 .footer-top {
     display: flex;
     justify-content:center;

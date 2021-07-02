@@ -1,4 +1,5 @@
-import { createInput, createDiv } from './utils.js';
+import { createInput, createDiv, createHeader } from './utils.js';
+// import { createInput, createDiv } from './utils.js';
 import { renderTasks } from './tasks.js';
 
 const handleListDelete = (listId) => {
@@ -62,7 +63,8 @@ const renderLists = async () => {
   leftPanel.innerHTML = '';
   const listsContainer = createDiv("lists__left-panel");
   leftPanel.append(listsContainer);
-  
+  const headerTag = createHeader("Lists", "lists__header");
+  listsContainer.append(headerTag);
 
   // create inputs for input to add, and edit
   createInput("listName", "list__add-input", listsContainer, "List Name", "list__input-div");
@@ -182,7 +184,7 @@ const handleTaskShow = (listId) => {
       const { list: { Tasks: tasks } } = await res.json();
 
       renderTasks(tasks, listId);
-      
+
     } catch (err) {
       console.error(err);
     }
@@ -191,7 +193,7 @@ const handleTaskShow = (listId) => {
 
 
 const showTasks = async () => {
-  
+
   // add event listeners to the delete buttons
   const listContainers = document.querySelectorAll(".list__container");
   if (listContainers) {
