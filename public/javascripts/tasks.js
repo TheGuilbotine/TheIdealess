@@ -185,7 +185,7 @@ const handleTaskAdd = async () => {
 
     if (!res.ok) {
       throw res;
-    }
+    } else document.querySelector(".task__add-input").value = "";
 
     const { task } = await res.json();
 
@@ -223,7 +223,9 @@ const handleTaskAdd = async () => {
 
 const addTaskHandler = () => {
   const addTaskButton = document.querySelector(".task__add-button");
+  const addTaskInput = document.querySelector(".task__add-input");
   addTaskButton.addEventListener("click", handleTaskAdd);
+  addTaskInput.addEventListener("change", handleTaskAdd);
 };
 
 document.addEventListener("DOMContentLoaded", async (e) => {
