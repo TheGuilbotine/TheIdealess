@@ -13,7 +13,11 @@ p {
 	grid-template-rows: auto;
     border-bottom: 1px solid black;
     padding: 10px;
-    background-color: rgba(36, 36, 140, 0.899);
+    background-color: rgba(40, 62, 160, 0.899);
+}
+
+.main-header .title {
+    color: #bfbfbf;
 }
 
 .title {
@@ -127,12 +131,6 @@ p {
     padding: 2%;
 }
 
-.tasks__header {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-}
-
 .lists__left_panel {
     margin: 2%;
     padding: 5%;
@@ -140,9 +138,13 @@ p {
 
 .list__body {
     padding-bottom: 5px;;
-    border: 1px solid black;
     margin: 1px;
     padding-left: 7px;
+    border: 1px solid rgb(253, 174, 145);
+    border-radius: 5px;
+    background-color: rgb(250, 244, 232);
+    box-shadow: peru;
+    font-size: 16px;
 }
 
 .task__body {
@@ -152,13 +154,13 @@ p {
     background-color: rgb(250, 244, 232);
     box-shadow: peru;
     font-size: 8px;
-    
+
 }
 
 .task__body .task__text {
     display: inline-block;
     width: 100%;
-    color: black; 
+    color: black;
     line-height: 1%; /*Space between lines of the paragraph */
     font-size: 16px;
     font-weight: bold;
@@ -182,10 +184,32 @@ p {
     border: 1px #9c9c9c solid;
     border-radius: 5px;
     margin-top: 0.5%;
-    margin-bottom: 0.5%;
+    margin-bottom: 4%;
     padding: 1%;
 }
 
 .task__input-div, .task__select-div {
     padding: 0.5%;
+}
+
+.lists__header,
+.tasks__header {
+    font-size: 22PX;
+    text-align: center;
+    font-weight: 600;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.list__input-div {
+    display: block;
+    font-size: 14px;
+    border: 1px #9c9c9c solid;
+    border-radius: 5px;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    padding: 1%;
 }

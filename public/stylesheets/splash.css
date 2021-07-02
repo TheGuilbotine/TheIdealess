@@ -7,14 +7,14 @@
 
 }
 
-.world-clocks {
+/* .world-clocks {
     border: 1px solid black ;
     height: 70px;
     width: 70px;
     margin: 10px;
     display: inline-flex;
 
-}
+} */
 
 .splash-content {
     grid-row-start: 2;
@@ -55,17 +55,5 @@
 
 .splash-content-links-logout-register {
     grid-row-start: 2;
-
-}
-
-.login-butt:hover {
-    background-color: crimson;
-}
-
-.register-butt {
-
-}
-
-.demo-butt {
 
 }

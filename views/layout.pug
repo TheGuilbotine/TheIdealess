@@ -12,46 +12,48 @@ html
         link(rel='stylesheet' href='/stylesheets/login.css')
         link(rel="stylesheet", href="/stylesheets/buttons.css")
         link(rel='stylesheet', href='/stylesheets/search-dropdown.css')
+        link(rel="stylesheet", href="/stylesheets/footer.css")
+        link(rel="stylesheet", href="/stylesheets/hover.css")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
   body
     block content
 
-  footer(class='footer')
-    p(class='footer-top') Welcome to WhatsNext, created by
-    div(class='footer-bottom')
+    footer(class='footer')
+      p(class='footer-top') Welcome to WhatsNext, created by
+      div(class='footer-bottom')
 
       div(class='footer__name-Taylor')
         h3(class='name') Taylor Walker
         div(class='footer__bottom-icons')
-          a(href='https://github.com/tayynicc') Github
+          a(class='name__link' href='https://github.com/tayynicc') Github
             i(class="fab fa-github")
 
-          a(href='mailto:tw10262@gmail.com') Email
+          a(class='name__link' href='mailto:tw10262@gmail.com') Email
             i(class="fas fa-envelope")
 
-          a(href='#') LinkedIn
+          a(class='name__link' href='#') LinkedIn
             i(class="fab fa-linkedin")
 
       div(class='footer-name' )
         h3(class='name') Nico Pierson
         div(class='footer__bottom-icons')
-          a(href='https://github.com/nicopierson') Github
+          a(class='name__link' href='https://github.com/nicopierson') Github
             i(class="fab fa-github")
 
-          a(href='#') Email
+          a(class='name__link' href='#') Email
               i(class="fas fa-envelope")
 
-          a(href='https://www.linkedin.com/in/nico-pierson/') LinkedIn
+          a(class='name__link' href='https://www.linkedin.com/in/nico-pierson/') LinkedIn
               i(class="fab fa-linkedin")
 
       div(class='footer-name')
         h3(class='name') Pierre Guilbault
         div(class='footer__bottom-icons')
-          a(href='https://github.com/TheGuilbotine') Github
+          a(class='name__link' href='https://github.com/TheGuilbotine') Github
             i(class="fab fa-github")
 
-            a(href='#') Email
+            a(class='name__link' href='#') Email
               i(class="fas fa-envelope")
 
-            a(href='https://www.linkedin.com/in/pierre-guilbault-30020549/') LinkedIn
+            a(class='name__link' href='https://www.linkedin.com/in/pierre-guilbault-30020549/') LinkedIn
               i(class="fab fa-linkedin")
