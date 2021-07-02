@@ -1,7 +1,8 @@
 const express = require("express");
-const { Tag } = require("../db/models");
+const { Tag, Task } = require("../db/models");
 const { asyncHandler, handleValidationErrors, check } = require("./utils");
 const { requireAuth } = require("../auth");
+const { Op } = require("sequelize");
 
 const router = express.Router();
 
@@ -19,6 +20,36 @@ router.get("/",
     const tags = await Tag.findAll();
     if (tags) {
       res.json({ tags });
+    } else {
+      next(allTagsNotFoundError());
+    }
+  })
+);
+
+router.post("/search",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const { searchString } = req.body;
+
+    const tags = await Tag.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${searchString}%`,
+        },
+      },
+      include: [Task],
+    });
+
+    const tasks = await Task.findAll({
+      where: {
+        taskName: {
+          [Op.iLike]: `%${searchString}%`,
+        },
+      },
+    });
+
+    if (tags) {
+      res.json({ tags, tasks });
     } else {
       next(allTagsNotFoundError());
     }

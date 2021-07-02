@@ -60,7 +60,7 @@ const validateList = [
 ];
 
 router.post('/',
-// requireAuth, //! require authentication for production
+requireAuth, //! require authentication for production
 validateList,
 asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth; //! use for production on browser
@@ -81,7 +81,7 @@ asyncHandler(async (req, res, next) => {
 
 // only change the list id
 router.put('/:id(\\d+)',
-// requireAuth, //! require authentication for production
+requireAuth, //! require authentication for production
 asyncHandler(async (req, res, next) => {
   const { listName } = req.body;
   const list = await List.findByPk(req.params.id);
@@ -97,7 +97,7 @@ asyncHandler(async (req, res, next) => {
 }));
 
 router.delete('/:id(\\d+)',
-// requireAuth, //! require authentication for production
+requireAuth, //! require authentication for production
 asyncHandler(async (req, res, next) => {
   const list = await List.findByPk(req.params.id)
 

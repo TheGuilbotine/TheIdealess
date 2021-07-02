@@ -73,7 +73,7 @@ p {
 
 .main-content {
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr;
 	grid-template-rows: auto;
     justify-content: space-around;
     margin-bottom: 12px;
@@ -110,7 +110,7 @@ p {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.right-panel {
+/* .right-panel {
     background-color: rgba(242, 231, 217, 0.934);
     border: 1px solid rgba(75, 75, 75, 0.653);
     grid-column-start: 3;
@@ -123,7 +123,7 @@ p {
     padding: 15px;
     border-radius: 7px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-}
+} */
 
 .tasks__center_display {
     width: 100%;

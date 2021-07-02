@@ -16,6 +16,19 @@ block content
     div(class='log-out-button-div')
       form(action='/logout' method='post')
         button(type='submit' class='logout-button') Logout
+    
+    div(class="search search--hidden" id="search-hide")
+      div(class="search__section")
+        div(class="search__section") 
+          //ul
+          //-           <li class="pref__section-link"><a href="#">CSS</a></li>
+          //-           <li class="pref__section-link"><a href="#">HTML</a></li>
+          //-           <li class="pref__section-link"><a href="#">JavaScript</a></li>
+          //-           <li class="pref__section-link"><a href="#">Python</a></li>
+          //-           </ul>
+          //-       </div>
+
+          //-   </div>
 
     //- div(class='settings-button-div')
     //-   i(class="fas fa-cog")
@@ -31,3 +44,4 @@ block content
   script(src='/javascripts/account.js' type='module')
   script(src='/javascripts/lists.js' type='module')
   script(src='/javascripts/tasks.js' type='module')
+  script(src='/javascripts/search.js' type='module')

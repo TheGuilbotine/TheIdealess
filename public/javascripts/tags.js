@@ -36,6 +36,19 @@ const addTag = (tagName, taskId, tagId) => {
   textTag.append(tagSpan);
 };
 
+const addAllTags = async (taskId) => {
+  try {
+    const res = await fetch(`/api/tasks/${taskId}`);
+    const { task } = await res.json();
+
+    task.Tags.forEach((tag) => {
+      addTag(tag.name, taskId, tag.id);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const handleTagAdd = (taskId) => {
   return async (event) => {
     try {
@@ -74,4 +87,4 @@ const handleTagAdd = (taskId) => {
   };
 };
 
-export { handleTags, handleTagAdd, addTag };
+export { handleTags, handleTagAdd, addTag, addAllTags };
