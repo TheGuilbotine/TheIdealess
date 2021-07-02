@@ -16,6 +16,10 @@ p {
     background-color: rgba(40, 62, 160, 0.899);
 }
 
+.main-header .title {
+    color: #bfbfbf;
+}
+
 .title {
     grid-column-start: 3;
 	grid-row-start: 1;
@@ -72,6 +76,8 @@ p {
     grid-template-columns: 0.5fr 1fr 1fr;
 	grid-template-rows: auto;
     justify-content: space-around;
+    margin-bottom: 12px;
+    margin-top: 12px
 }
 
 
@@ -81,7 +87,6 @@ p {
     grid-column-start: 1;
 	grid-row-start: 1;
     height: auto;
-    margin-top: 10px;
     margin-left: 10px;
     padding: 15px;
     border-radius: 7px;
@@ -92,7 +97,6 @@ p {
     background-color: rgb(250, 247, 245);
     border: 1px solid rgba(254, 242, 229, 0.653);
     height: auto;
-    margin-top: 10px;
     margin-right: 10px;
     margin-left: 10px;
     grid-column-start: 2;
@@ -111,7 +115,6 @@ p {
     border: 1px solid rgba(75, 75, 75, 0.653);
     grid-column-start: 3;
 	grid-row-start: 1;
-    margin-top: 10px;
     margin-right: 10px;
     display: flex;
 	align-items: center;
