@@ -1,5 +1,5 @@
 import { createInput, createDiv } from './utils.js';
-// import {} from './tasks';
+import { renderTasks } from './tasks.js';
 
 const handleListDelete = (listId) => {
   return async () => {
@@ -151,13 +151,9 @@ const handleListAdd = async () => {
 
     // add listener to edit and add
     const editButton = document.querySelector(`#list-${list.id} .list__edit-button`);
-    console.log(editButton);
-    console.log(editButton.id);
     if (editButton) editButton.addEventListener('click', handleListEdit(editButton.id));
 
     const deleteButton = document.querySelector(`#list-${list.id} .list__delete-button`);
-    console.log(deleteButton);
-    console.log(deleteButton.id);
     if (deleteButton) deleteButton.addEventListener('click', handleListDelete(deleteButton.id));
 
   } catch (err) {
@@ -184,8 +180,8 @@ const handleTaskShow = (listId) => {
 
       // get all the tasks from this list
       const { list: { Tasks: tasks } } = await res.json();
-      console.log(tasks);
-      // renderTasks(tasks);
+
+      renderTasks(tasks, listId);
       
     } catch (err) {
       console.error(err);

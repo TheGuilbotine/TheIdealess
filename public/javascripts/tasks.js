@@ -4,7 +4,8 @@ import { handleTags, handleTagAdd } from './tags.js';
 const getTaskInputs = () => {
   const taskAddInput = document.querySelector(".task__add-input");
   const taskName = taskAddInput.value;
-  const listId = document.querySelector(".task__select-list").value;
+  const listId = document.querySelector(".tasks__list").id;
+  if (!listId) throw new Error('listId is undefined.');
   const taskTypeId = document.querySelector(".task__select-task-types").value;
   const isCompleted = false;
   const noteValue = document.querySelector(".task__note-input").value;
@@ -66,57 +67,34 @@ const handleTaskEdit = (taskId) => {
   };
 };
 
-const renderTasks = async () => {
-  // GET tasks
-  const res = await fetch("/api/tasks");
-
-  if (res.status === 401) {
-    window.location.href = "/login";
-    return;
+const addTaskListeners = () => {
+  // add event listeners to the delete buttons
+  const deleteTaskButtons = document.querySelectorAll(".task__delete-button");
+  if (deleteTaskButtons) {
+    deleteTaskButtons.forEach((button) => {
+      button.addEventListener("click", handleTaskDelete(button.id));
+    });
+  }
+  const editTaskButtons = document.querySelectorAll(".task__edit-button");
+  if (editTaskButtons) {
+    editTaskButtons.forEach((button) => {
+      button.addEventListener("click", handleTaskEdit(button.id));
+    });
   }
 
-  const { tasks } = await res.json();
-  const centerDisplay = document.querySelector(".center-display");
-  // reset container
-  centerDisplay.innerHTML = "";
-
-  
-  const tasksInputContainer = createDiv("tasks__input-add");
-  const tasksContainer = createDiv("tasks__center-display");
-  centerDisplay.append(tasksContainer);
-
-  // create header
-  const headerTag = createHeader("Tasks", "tasks__header");
-  tasksContainer.append(headerTag);
-  
-  // create inputs for input to add, and edit
-  createInput("taskAddName", "task__add-input", tasksInputContainer, "Task Name", "task__input-div");
-  
-  const addButton = document.createElement("button");
-  addButton.className = "task__add-button";
-  addButton.innerHTML = "Add task";
-  tasksInputContainer.append(addButton);
-
-  
-  // Create select element from lists
-  try {
-    // get the lists
-    const resLists = await fetch("/api/lists");
-    const { lists } = await resLists.json();
-    createSelectList("taskSelectList", "task__select-list", lists, tasksInputContainer, "List", "task__select-div");
-
-    const resTaskTypes = await fetch("/api/task-types");
-    const { taskTypes } = await resTaskTypes.json();
-    createSelectTaskType("taskTypeSelect", "task__select-task-types", taskTypes, tasksInputContainer, "Task Type", "task__select-div");
-  } catch (err) {
-    console.error(err);
+  const tagInputTags = document.querySelectorAll(".task__add-tag-input");
+  if (tagInputTags) {
+    tagInputTags.forEach((input) => {
+      input.addEventListener("change", handleTagAdd(input.id));
+    });
   }
+};
 
-  // note and due date fields
-  createInput("taskNote", "task__note-input", tasksInputContainer, "Note", "task__input-div");
-  createInput("taskDueDate", "task__due-date-input", tasksInputContainer, "Due Date", "task__input-div");
-  tasksContainer.append(tasksInputContainer);
-  
+const renderTasks = (tasks, listId) => {
+
+  const tasksContainer = document.querySelector('.tasks__list');
+  tasksContainer.id = listId;
+  tasksContainer.innerHTML = "";
 
   const tasksHTML = tasks.map(
     // TODO Add mark checked button
@@ -145,28 +123,54 @@ const renderTasks = async () => {
 
   tasksContainer.innerHTML += tasksHTML.join("");
 
-  // add event listeners to the delete buttons
-  const deleteTaskButtons = document.querySelectorAll(".task__delete-button");
-  if (deleteTaskButtons) {
-    deleteTaskButtons.forEach((button) => {
-      button.addEventListener("click", handleTaskDelete(button.id));
-    });
-  }
-  const editTaskButtons = document.querySelectorAll(".task__edit-button");
-  if (editTaskButtons) {
-    editTaskButtons.forEach((button) => {
-      button.addEventListener("click", handleTaskEdit(button.id));
-    });
+  addTaskListeners();
+};
+
+const renderTaskInputs = async () => {
+
+  const centerDisplay = document.querySelector(".center-display");
+  // reset container
+  centerDisplay.innerHTML = "";
+
+  
+  const tasksInputContainer = createDiv("tasks__input-add");
+  const tasksContainer = createDiv("tasks__center-display");
+  centerDisplay.append(tasksContainer);
+
+  // create header
+  const headerTag = createHeader("Tasks", "tasks__header");
+  tasksContainer.append(headerTag);
+  tasksContainer.append(tasksInputContainer);
+  // add div container for tasksList
+  const tasksListContainer = createDiv("tasks__list");
+  tasksContainer.append(tasksListContainer);
+
+  
+  // create inputs for input to add, and edit
+  createInput("taskAddName", "task__add-input", tasksInputContainer, "Task Name", "task__input-div");
+  
+  const addButton = document.createElement("button");
+  addButton.className = "task__add-button";
+  addButton.innerHTML = "Add task";
+  tasksInputContainer.append(addButton);
+
+  
+  // Create select element from lists
+  try {
+
+    const resTaskTypes = await fetch("/api/task-types");
+    const { taskTypes } = await resTaskTypes.json();
+    createSelectTaskType("taskTypeSelect", "task__select-task-types", taskTypes, tasksInputContainer, "Task Type", "task__select-div");
+  } catch (err) {
+    console.error(err);
   }
 
-  const tagInputTags = document.querySelectorAll(".task__add-tag-input");
-  if (tagInputTags) {
-    tagInputTags.forEach((input) => {
-      input.addEventListener("change", handleTagAdd(input.id));
-    });
-  }
+  // note and due date fields
+  createInput("taskNote", "task__note-input", tasksInputContainer, "Note", "task__input-div");
+  createInput("taskDueDate", "task__due-date-input", tasksInputContainer, "Due Date", "task__input-div", "date");
 
   await addTaskHandler();
+
 };
 
 const handleTaskAdd = async () => {
@@ -183,7 +187,35 @@ const handleTaskAdd = async () => {
       throw res;
     }
 
-    await renderTasks();
+    const { task } = await res.json();
+
+    // add task
+    const taskCenterDisplay = document.querySelector('.tasks__list');
+
+    taskCenterDisplay.innerHTML += `
+      <div class='task__container' id='task-${task.id}'>
+        <div class='task__body'>
+          <div class='task__text task__text-${task.id}'>
+            ${task.taskName}
+          </div>
+          <div class='task__tag-container' id='${task.id}'>
+          <label for='task__add-tag-label'>Add Tag</label>
+          <input id='${task.id}' class='task__add-tag-input'>
+          </div>
+          <div class='task__btn'>
+            <button id='${task.id}' class='task__delete-button btn btn-secondary'>
+              Delete
+            </button>
+            <button id='${task.id}' class='task__edit-button btn btn-secondary'>
+                Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    addTaskListeners()
+
   } catch (err) {
     console.error(err);
   }
@@ -196,9 +228,13 @@ const addTaskHandler = () => {
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   try {
-    await renderTasks();
+    await renderTaskInputs();
     handleTags();
   } catch (e) {
     console.errors(e);
   }
 });
+
+export {
+  renderTasks,
+};
