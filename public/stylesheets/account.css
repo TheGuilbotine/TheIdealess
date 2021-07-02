@@ -16,6 +16,10 @@ p {
     background-color: rgba(36, 36, 140, 0.899);
 }
 
+.main-header .title {
+    color: #bfbfbf;
+}
+
 .title {
     grid-column-start: 3;
 	grid-row-start: 1;
