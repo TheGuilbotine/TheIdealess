@@ -30,7 +30,7 @@ router.post("/search",
   requireAuth,
   asyncHandler(async (req, res, next) => {
     const { searchString } = req.body;
-    console.log(searchString);
+
     const tags = await Tag.findAll({
       where: {
         name: {
@@ -39,9 +39,17 @@ router.post("/search",
       },
       include: [Task],
     });
-    console.log(tags);
+
+    const tasks = await Task.findAll({
+      where: {
+        taskName: {
+          [Op.iLike]: `%${searchString}%`,
+        },
+      },
+    });
+
     if (tags) {
-      res.json({ tags });
+      res.json({ tags, tasks });
     } else {
       next(allTagsNotFoundError());
     }
