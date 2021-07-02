@@ -2,7 +2,10 @@ import { createInput, createDiv } from './utils.js';
 import { renderTasks } from './tasks.js';
 
 const handleListDelete = (listId) => {
-  return async () => {
+
+  return async (event) => {
+    event.stopPropagation();
+
     try {
       const res = await fetch(`/api/lists/${listId}`, {
         method: 'DELETE',
@@ -23,7 +26,9 @@ const handleListDelete = (listId) => {
 };
 
 const handleListEdit = (listId) => {
-  return async () => {
+  return async (event) => {
+    event.stopPropagation();
+
       const listEditInput = document.querySelector('.list__add-input')
 
       const listName = listEditInput.value
@@ -40,11 +45,34 @@ const handleListEdit = (listId) => {
         throw res;
       }
 
-      document.querySelector(`.list__text-${listId}`).innerHTML = listName
+      document.querySelector(`.list__text-${listId}`).innerHTML = listName;
     } catch (err) {
       console.error(err);
     }
   };
+};
+
+const addEvents = async () => {
+  await addTaskEvents();
+  await addListHandler();
+
+  // add event listeners to the delete buttons
+  const deleteButtons = document.querySelectorAll('.list__delete-button');
+
+  if (deleteButtons) {
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', handleListDelete(button.id));
+    });
+  }
+
+  const editButtons = document.querySelectorAll('.list__edit-button')
+
+  if(editButtons){
+    editButtons.forEach((button) => {
+        button.addEventListener('click', handleListEdit(button.id));
+    });
+  }
+
 };
 
 const renderLists = async () => {
@@ -89,30 +117,12 @@ const renderLists = async () => {
   );
 
   listsContainer.innerHTML += listsHTML.join('');
-
-
-  // add event listeners to the delete buttons
-  const deleteButtons = document.querySelectorAll('.list__delete-button');
-
-  if (deleteButtons) {
-    deleteButtons.forEach((button) => {
-      button.addEventListener('click', handleListDelete(button.id));
-    });
-  }
-
-  const editButtons = document.querySelectorAll('.list__edit-button')
-
-  if(editButtons){
-    editButtons.forEach((button) => {
-        button.addEventListener('click', handleListEdit(button.id));
-      });
-  }
-
-  await addListHandler();
-
+  
+  
+  await addEvents();
 };
 
-const handleListAdd = async () => {
+const handleListAdd = async (event) => {
 
   try {
     const listAddInput = document.querySelector('.list__add-input');
@@ -149,13 +159,8 @@ const handleListAdd = async () => {
       </div>
     `;
 
-    // add listener to edit and add
-    const editButton = document.querySelector(`#list-${list.id} .list__edit-button`);
-    if (editButton) editButton.addEventListener('click', handleListEdit(editButton.id));
-
-    const deleteButton = document.querySelector(`#list-${list.id} .list__delete-button`);
-    if (deleteButton) deleteButton.addEventListener('click', handleListDelete(deleteButton.id));
-
+    await addEvents();
+    
   } catch (err) {
     console.error(err);
   }
@@ -166,11 +171,13 @@ const addListHandler = async () => {
   const addListInput = document.querySelector('.list__add-input');
 
   addListButton.addEventListener('click', handleListAdd);
-  addListInput.addEventListener('change', handleListAdd);
+  // addListInput.addEventListener('change', handleListAdd);
 };
 
 const handleTaskShow = (listId) => {
+
   return async () => {
+
     try {
       const res = await fetch(`/api/lists/${listId}`);
 
@@ -190,7 +197,7 @@ const handleTaskShow = (listId) => {
 };
 
 
-const showTasks = async () => {
+const addTaskEvents = () => {
   
   // add event listeners to the delete buttons
   const listContainers = document.querySelectorAll(".list__container");
@@ -205,7 +212,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
   try {
     await renderLists();
-    await showTasks();
+    
   } catch (e) {
     console.error(e);
   }

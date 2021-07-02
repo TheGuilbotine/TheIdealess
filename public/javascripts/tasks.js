@@ -1,5 +1,5 @@
 import { createInput, createSelectList, createDiv, createSelectTaskType, createHeader } from './utils.js';
-import { handleTags, handleTagAdd } from './tags.js';
+import { handleTags, handleTagAdd, addAllTags } from './tags.js';
 
 const getTaskInputs = () => {
   const taskAddInput = document.querySelector(".task__add-input");
@@ -61,6 +61,7 @@ const handleTaskEdit = (taskId) => {
       if (!res.ok) throw res;
 
       document.querySelector(`.task__text-${taskId}`).innerHTML = taskName;
+      addAllTags(taskId);
     } catch (err) {
       console.error(err);
     }
@@ -122,6 +123,10 @@ const renderTasks = (tasks, listId) => {
   );
 
   tasksContainer.innerHTML += tasksHTML.join("");
+
+  tasks.forEach((task) => {
+    addAllTags(task.id);
+  });
 
   addTaskListeners();
 };
@@ -214,7 +219,7 @@ const handleTaskAdd = async () => {
       </div>
     `;
 
-    addTaskListeners()
+    addTaskListeners();
 
   } catch (err) {
     console.error(err);
@@ -223,9 +228,8 @@ const handleTaskAdd = async () => {
 
 const addTaskHandler = () => {
   const addTaskButton = document.querySelector(".task__add-button");
-  const addTaskInput = document.querySelector(".task__add-input");
+
   addTaskButton.addEventListener("click", handleTaskAdd);
-  addTaskInput.addEventListener("change", handleTaskAdd);
 };
 
 document.addEventListener("DOMContentLoaded", async (e) => {
