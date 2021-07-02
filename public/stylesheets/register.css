@@ -14,9 +14,7 @@
    grid-row-start: 2;
    display:block;
    background-color: white;
-
 }
-
 
 .register__button {
     font-size: medium;
@@ -31,7 +29,7 @@
     top:183px;
 }
 
-footer {
+/* footer {
     display: grid;
     grid-template-rows: repeat(2, 1fr);
 	grid-template-columns: auto;
@@ -39,33 +37,33 @@ footer {
     color: black;
     align-items: center;
 
-}
+} */
 
 .footer-top {
     display: flex;
     justify-content:center;
+    margin-bottom: 5px;
 }
 
 .footer-bottom {
-
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: auto;
     height: auto;
+}
 
-
+.footer-bottom div {
+    margin: 5px;
 }
 
 .footer__bottom-icons{
     display:flex;
     justify-content: space-around;
-
-
 }
 
 a {
     text-decoration: none;
-    color:black;
+    color:#bfbfbf;
     font-size: 16px;
 }
 
