@@ -106,9 +106,7 @@ const renderLists = async () => {
     <div class='list__container' id='list-${id}'>
       <div class='list__body'>
         <p class='list__text-${id}'>${listName}</p>
-        <button id='${id}' class='list__delete-button btn btn-secondary'>
-          Delete
-        </button>
+        <i id='${id}' class='far fa-trash-alt list__delete-button'></i>
         <button id='${id}' class='list__edit-button btn btn-secondary'>
           Edit
         </button>
@@ -150,9 +148,7 @@ const handleListAdd = async (event) => {
       <div class='list__container' id='list-${list.id}'>
         <div class='list__body'>
           <p class='list__text-${list.id}'>${list.listName}</p>
-          <button id='${list.id}' class='list__delete-button btn btn-secondary'>
-            Delete
-          </button>
+          <i class='far fa-trash-alt list__delete-button' id='${list.id}'></i>
           <button id='${list.id}' class='list__edit-button btn btn-secondary'>
             Edit
           </button>

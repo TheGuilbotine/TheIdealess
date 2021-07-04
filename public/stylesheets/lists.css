@@ -1,0 +1,35 @@
+.lists__left_panel {
+    margin: 2%;
+    padding: 5%;
+}
+
+.list__body {
+    padding-bottom: 5px;;
+    margin: 1px;
+    padding-left: 7px;
+    border: 1px solid rgb(253, 174, 145);
+    border-radius: 5px;
+    background-color: rgb(250, 244, 232);
+    box-shadow: peru;
+    font-size: 16px;
+}
+
+.list__input-div {
+    display: block;
+    font-size: 14px;
+    border: 1px #9c9c9c solid;
+    border-radius: 5px;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    padding: 1%;
+}
+
+.lists__header {
+    font-size: 22PX;
+    text-align: center;
+    font-weight: 600;
+}
+
+.list__container {
+
+}
