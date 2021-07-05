@@ -96,10 +96,6 @@ button:hover {
 
 }
 
-.task__add-button {
-
-}
-
 .task__add-button:hover {
     background-color: seagreen;
     color: springgreen;

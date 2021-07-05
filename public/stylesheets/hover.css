@@ -1,17 +1,15 @@
 .list__container {
-    margin-bottom: 8px;
     transition: all 1s;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 .task__body {
-    margin-bottom: 8px;
     transition: all 1s;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 .list__container:hover {
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    background-color: rgb(252, 252, 252);
+    box-shadow: rgb(33, 15, 44) 20px 0px 30px -10px, rgb(33, 15, 44) -20px 0px 30px -10px;
+    background-color: rgb(222, 222, 248);
 }
 
 .task__body:hover {

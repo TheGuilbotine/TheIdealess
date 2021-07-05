@@ -6,11 +6,17 @@
 .list__body {
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 5px;;
-    margin: 1px;
-    padding-left: 7px;
-    background-color: rgb(250, 244, 232);
+    margin-left: 1px;
+    margin-right: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(161, 161, 255);
     font-size: 16px;
+}
+
+.list__body:hover {
+  transition: 1s;
+  background-color: rgb(205, 205, 253);
 }
 
 .list__body > p {
@@ -39,7 +45,6 @@
 
 .list__container {
     display: block;
-    border: 1px solid rgb(253, 174, 145);
-    border-radius: 5px;
-    box-shadow: peru;
+    border: 0px solid rgb(161, 161, 255);
+    box-shadow: rgb(72,61,139);
 }
