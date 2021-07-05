@@ -4,14 +4,21 @@
 }
 
 .list__body {
+    display: flex;
+    flex-wrap: wrap;
     padding-bottom: 5px;;
     margin: 1px;
     padding-left: 7px;
-    border: 1px solid rgb(253, 174, 145);
-    border-radius: 5px;
     background-color: rgb(250, 244, 232);
-    box-shadow: peru;
     font-size: 16px;
+}
+
+.list__body > p {
+  flex-grow: 1;
+}
+
+.list__body > p, div {
+  white-space: nowrap;
 }
 
 .list__input-div {
@@ -25,11 +32,14 @@
 }
 
 .lists__header {
-    font-size: 22PX;
+    font-size: 22px;
     text-align: center;
     font-weight: 600;
 }
 
 .list__container {
-
+    display: block;
+    border: 1px solid rgb(253, 174, 145);
+    border-radius: 5px;
+    box-shadow: peru;
 }

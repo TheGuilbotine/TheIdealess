@@ -110,8 +110,8 @@ const renderTasks = (tasks, listId) => {
             <input id='${id}' class='task__add-tag-input'>
             </div>
             <div class='task__btn'>
-              <i class='far fa-trash-alt task__delete-button' id='${id}'></i>
               <i id='${id}' class='fas fa-edit task__edit-button'></i>
+              <i class='far fa-trash-alt task__delete-button' id='${id}'></i>
             </div>
           </div>
         </div>
@@ -200,12 +200,12 @@ const handleTaskAdd = async () => {
             ${task.taskName}
           </div>
           <div class='task__tag-container' id='${task.id}'>
-          <label for='task__add-tag-label'>Add Tag</label>
-          <input id='${task.id}' class='task__add-tag-input'>
+            <label for='task__add-tag-label'>Add Tag</label>
+            <input id='${task.id}' class='task__add-tag-input'>
           </div>
           <div class='task__btn'>
-            <i class='far fa-trash-alt task__delete-button' id='${task.id}'></i>
             <i id='${task.id}' class='fas fa-edit task__edit-button'></i>
+            <i class='far fa-trash-alt task__delete-button' id='${task.id}'></i>
           </div>
         </div>
       </div>
