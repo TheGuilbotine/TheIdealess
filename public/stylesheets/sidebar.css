@@ -92,11 +92,7 @@
   transition: var(--transition-speed);
 }
 
-/* .sidebar:hover .logo svg {
-  transform: rotate(-180deg);
-} */
-
-/* Small screens */
+/* mobile or smaller screens */
 @media only screen and (max-width: 600px) {
   .sidebar__container {
     bottom: 0;
@@ -121,7 +117,7 @@
   }
 }
 
-/* Large screens */
+/* workstation or larger screens */
 @media only screen and (min-width: 600px) {
   .sidebar__container {
     top: 0;
