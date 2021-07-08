@@ -1,6 +1,22 @@
-# Express Project Skeleton
+# WhatsNext by The Idealess
 
-Use this project skeleton as a starting point for structuring your app. Things to note
-* Sequelize configuration has not yet been added -- you will need to set that up yourself
-* You may find yourself wanting to use javascript -- js files can be added in `public/javascripts` and should be appended to the Pug templates as needed
-* CSS files can go in `public/stylesheets` and also will need to be added to Pug templates
+# Your app to keep you on Track. A TODO list app for your travel ideas and dreams.
+
+## Technologies Used
+- JavaScript
+- CSS3
+- Pug Templates HTML5
+- PostgreSQL
+- Hosted on Heroku
+
+## Brief Site Walkthrough
+- Splash page allows users to login, register, or use a Demo account to check out the app.
+- All pages have a footer with links to the creators GitHubs, emails, and Linkedin accounts.
+- Account Page allows users to dynamically add, edit, and deltete lists that then can add, delete, and edit tasks on.
+
+## App Link
+https://whatsnext-theidealess.herokuapp.com/
+
+## Challenges
+- Deleting items took us through a loop, trying to figure out the cascade of the delete process
+- Pug Templates were finicky in trying to make sure divs and footers were nested where they were supposed to be.
