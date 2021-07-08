@@ -1,0 +1,182 @@
+.sidebar__container {
+  position: fixed;
+  background-color: var(--bg-primary);
+  transition: width 600ms ease;
+  overflow: scroll;
+}
+
+.sidebar__nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.sidebar__item {
+  width: 100%;
+}
+
+.sidebar__item:last-child {
+  margin-top: auto;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+}
+
+.sidebar__link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.sidebar__link-text {
+  display: none;
+  margin-left: 1.6rem;
+}
+
+.sidebar__link i {
+  display: flex;
+  justify-content: center;
+  width: 1.5rem;
+  min-width: 1.5rem;
+  margin: 0 1.5rem;
+}
+
+.fa-primary {
+  color: #ff7eee;
+}
+
+.fa-secondary {
+  color: #df49a6;
+}
+
+.fa-primary,
+.fa-secondary {
+  transition: var(--transition-speed);
+}
+
+.sidebar__logo {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  font-size: 1.5rem;
+  letter-spacing: 0.3ch;
+  width: 100%;
+}
+
+.sidebar__logo i {
+  display: flex;
+  transform: rotate(0deg);
+  transition: var(--transition-speed);
+}
+
+.sidebar__logo-text
+{
+  display: inline;
+  position: absolute;
+  left: -999px;
+  transition: var(--transition-speed);
+}
+
+/* mobile or smaller screens */
+@media only screen and (max-width: 600px) {
+  .sidebar__container {
+    bottom: 0;
+    width: 100vw;
+    height: 5rem;
+  }
+
+  .sidebar__logo {
+    display: none;
+  }
+
+  .sidebar__nav {
+    flex-direction: row;
+  }
+
+  .sidebar__link {
+    justify-content: center;
+  }
+
+  main {
+    margin: 0;
+  }
+}
+
+/* workstation or larger screens */
+@media only screen and (min-width: 600px) {
+  .sidebar__container {
+    top: 0;
+    width: 5rem;
+    height: 100vh;
+  }
+
+  .sidebar__container:hover {
+    width: 16rem;
+  }
+
+  .sidebar__container:hover .sidebar__link-text {
+    display: inline;
+  }
+
+  .sidebar__container:hover .sidebar__logo i
+  {
+    margin-left: 11rem;
+  }
+
+  .sidebar__container:hover .sidebar__logo-text
+  {
+    left: 0px;
+  }
+}
+
+.dark {
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+}
+
+.light {
+  --text-primary: #1f1f1f;
+  --text-secondary: #000000;
+  --bg-primary: #ffffff;
+  --bg-secondary: #e4e4e4;
+}
+
+.solar {
+  --text-primary: #576e75;
+  --text-secondary: #35535c;
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #f5e5b8;
+}
+
+.dark #darkIcon {
+  display: block;
+}
+
+.light #lightIcon {
+  display: block;
+}
+
+.solar #solarIcon {
+  display: block;
+}
+
+.sidebar__link .hidden {
+  display: none;
+}

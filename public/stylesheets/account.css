@@ -1,3 +1,6 @@
+@import url('lists.css');
+@import url('tasks.css');
+
 h2 {
     display: flex;
     justify-content: center;
@@ -125,91 +128,8 @@ p {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
 } */
 
-.tasks__center_display {
-    width: 100%;
-    margin: 2%;
-    padding: 2%;
-}
-
-.lists__left_panel {
-    margin: 2%;
-    padding: 5%;
-}
-
-.list__body {
-    padding-bottom: 5px;;
-    margin: 1px;
-    padding-left: 7px;
-    border: 1px solid rgb(253, 174, 145);
-    border-radius: 5px;
-    background-color: rgb(250, 244, 232);
-    box-shadow: peru;
-    font-size: 16px;
-}
-
-.task__body {
-    padding: 0.5vw;
-    border: 1px solid rgb(253, 174, 145);
-    border-radius: 5px;
-    background-color: rgb(250, 244, 232);
-    box-shadow: peru;
-    font-size: 8px;
-
-}
-
-.task__body .task__text {
-    display: inline-block;
-    width: 100%;
-    color: black;
-    line-height: 1%; /*Space between lines of the paragraph */
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.task__body span {
-    display: inline-block;
-    background-color: brown;
-    color: white;
-    font-weight: bold;
-    border-radius: 15px;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-    padding: 1.5%;
-    margin: 4px;
-    font-size: 12px;
-}
-
-.tasks__input-add {
-    display: block;
-    font-size: 14px;
-    border: 1px #9c9c9c solid;
-    border-radius: 5px;
-    margin-top: 0.5%;
-    margin-bottom: 4%;
-    padding: 1%;
-}
-
-.task__input-div, .task__select-div {
-    padding: 0.5%;
-}
-
-.lists__header,
-.tasks__header {
-    font-size: 22PX;
-    text-align: center;
-    font-weight: 600;
-}
-
 label {
     font-weight: 600;
     font-size: 14px;
 }
 
-.list__input-div {
-    display: block;
-    font-size: 14px;
-    border: 1px #9c9c9c solid;
-    border-radius: 5px;
-    margin-top: 0.5%;
-    margin-bottom: 0.5%;
-    padding: 1%;
-}

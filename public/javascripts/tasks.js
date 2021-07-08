@@ -110,12 +110,8 @@ const renderTasks = (tasks, listId) => {
             <input id='${id}' class='task__add-tag-input'>
             </div>
             <div class='task__btn'>
-              <button id='${id}' class='task__delete-button btn btn-secondary'>
-                Delete
-              </button>
-              <button id='${id}' class='task__edit-button btn btn-secondary'>
-                  Edit
-              </button>
+              <i id='${id}' class='fas fa-edit task__edit-button'></i>
+              <i class='far fa-trash-alt task__delete-button' id='${id}'></i>
             </div>
           </div>
         </div>
@@ -204,16 +200,12 @@ const handleTaskAdd = async () => {
             ${task.taskName}
           </div>
           <div class='task__tag-container' id='${task.id}'>
-          <label for='task__add-tag-label'>Add Tag</label>
-          <input id='${task.id}' class='task__add-tag-input'>
+            <label for='task__add-tag-label'>Add Tag</label>
+            <input id='${task.id}' class='task__add-tag-input'>
           </div>
           <div class='task__btn'>
-            <button id='${task.id}' class='task__delete-button btn btn-secondary'>
-              Delete
-            </button>
-            <button id='${task.id}' class='task__edit-button btn btn-secondary'>
-                Edit
-            </button>
+            <i id='${task.id}' class='fas fa-edit task__edit-button'></i>
+            <i class='far fa-trash-alt task__delete-button' id='${task.id}'></i>
           </div>
         </div>
       </div>

@@ -96,10 +96,6 @@ button:hover {
 
 }
 
-.task__add-button {
-
-}
-
 .task__add-button:hover {
     background-color: seagreen;
     color: springgreen;
@@ -107,29 +103,28 @@ button:hover {
 
 .task__edit-button:hover {
     background-color: rgb(28, 238, 9);
-
 }
 
-.list__delete-button {
-    background-color: rgb(4, 124, 94);
-
+.list__delete-button::before {
+    background-color: rgb(250, 244, 232);
+    /* background-color: rgb(4, 124, 94); */
 }
 
-.list__edit-button {
-    background-color: rgb(4, 124, 94);
-
+.list__edit-button::before {
+    background-color: rgb(250, 244, 232);
+    /* background-color: rgb(4, 124, 94); */
 }
 
 .list__add-button {
     margin-bottom: 11px;
 
 }
-.list__delete-button:hover {
+.list__delete-button:hover::before {
     background-color: red;
 
 }
 
-.list__edit-button:hover {
+.list__edit-button:hover::before {
     background-color: rgb(28, 238, 9);
 
 }
